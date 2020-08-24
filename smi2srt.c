@@ -12,6 +12,11 @@
 #define CMD_LEN PATH_LEN * 2 + 20
 
 #define CONVERT_V1 "./convert_v1 \""
+#define TMPFILE "smi2srt.tmp"
+#define LOGFILE "log.txt"
+
+#define STDOUT_SAVE 100
+#define STDERR_SAVE 101
 
 typedef enum {false, true} bool;
 
@@ -20,8 +25,25 @@ bool backup = false;
 char cmd[CMD_LEN] = CONVERT_V1;
 
 char pwd[PATH_LEN];
+char tmpFile[PATH_LEN];
 char nowRootDir[PATH_LEN];
 char backupDir[PATH_LEN];
+
+int tmpFd;
+
+void redirection(char *cmd)
+{
+	if((tmpFd = open(tmpFile, O_RDWR | O_CREAT | O_TRUNC, 0644)) < 0){
+		fprintf(stderr, "open error for %s\n", tmpFile);
+		return;
+	}
+	dup2(STDOUT_FILENO, STDOUT_SAVE);
+	dup2(tmpFd, STDOUT_FILENO);
+	system(cmd);
+	dup2(STDOUT_SAVE, STDOUT_FILENO);
+	close(tmpFd);
+	return;
+}
 
 void smi2srt(char path[PATH_LEN])
 {
@@ -127,12 +149,17 @@ void get_abs_path(char result[PATH_LEN], char *path)
 
 int main(int argc, char *argv[])
 {
-	FILE *fp = fopen("log.txt", "a");
-	dup2(STDOUT_FILENO, 100);
-	dup2(STDERR_FILENO, 101);
-	dup2(fileno(fp), STDOUT_FILENO);
-	dup2(fileno(fp), STDERR_FILENO);
+	int logFd;
+	if((logFd = open(LOGFILE, O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
+		fprintf(stderr, "open error for %s\n", LOGFILE);
+		return 1;
+	}
+	dup2(STDERR_FILENO, STDERR_SAVE);
+	dup2(logFd, STDERR_FILENO);
 	getcwd(pwd, PATH_LEN);
+	strcpy(tmpFile, pwd);
+	strcat(tmpFile, "/");
+	strcat(tmpFile, TMPFILE);
 	for(int i = 1; i < argc; i++){
 		if(!strcmp(argv[i], "-b")){
 			backup = true;
@@ -151,8 +178,7 @@ int main(int argc, char *argv[])
 		strcpy(nowRootDir, nowPath);
 		search_directory(nowPath);
 	}
-	fclose(fp);
-	dup2(100, STDOUT_FILENO);
-	dup2(101, STDERR_FILENO);
+	close(logFd);
+	dup2(STDERR_SAVE, STDERR_FILENO);
 	exit(0);
 }
