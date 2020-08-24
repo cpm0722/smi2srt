@@ -11,11 +11,13 @@
 #define FILE_LEN 128
 #define CMD_LEN PATH_LEN * 2 + 20
 
+#define CONVERT_V1 "./convert_v1 \""
+
 typedef enum {false, true} bool;
 
 bool backup = false;
 
-char cmd[CMD_LEN] = "./smi2srt \"";
+char cmd[CMD_LEN] = CONVERT_V1;
 
 char pwd[PATH_LEN];
 char nowRootDir[PATH_LEN];
@@ -23,13 +25,13 @@ char backupDir[PATH_LEN];
 
 void smi2srt(char path[PATH_LEN])
 {
-	strcpy(cmd + strlen("./smi2srt \""), path);
+	strcpy(cmd + strlen(CONVERT_V1), path);
 	strcat(cmd, "\" \"");
 	strncat(cmd, path, strlen(path)-3);
 	strcat(cmd, "srt\"");
 	strcat(cmd, " -d1");
 	//fprintf(stderr, "cmd: %s\n", cmd);
-	system(cmd);
+	//system(cmd);
 	return;
 }
 
