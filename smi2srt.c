@@ -14,6 +14,7 @@
 #define CONVERT_V1 "./convert_v1 \""
 #define CONVERT_V2 "/usr/local/bin/smi2srt -n \""
 #define GREP "grep -i \"<body>\" \""
+#define GREP_ERROR "grep -i \"Error\" \""
 #define GREPFILE "grep.tmp"
 #define TMPFILE "tmp.tmp"
 #define LOGFILE "log.txt"
@@ -29,13 +30,14 @@ bool backup = false;
 char cmd_v1[CMD_LEN] = CONVERT_V1;
 char cmd_v2[CMD_LEN] = CONVERT_V2;
 char grepCmd[CMD_LEN] = GREP;
+char grepErrorCmd[CMD_LEN] = GREP_ERROR;
 
 char pwd[PATH_LEN];
 char nowRootDir[PATH_LEN];
 char backupDir[PATH_LEN];
 
 int testFd;
-int errorFd;
+FILE *errorFp;
 
 
 void redirection(char *cmd, const char *tmpFile)
@@ -72,22 +74,39 @@ void smi2srt(char path[PATH_LEN])
 		strncat(cmd_v1, path, strlen(path)-3);
 		strcat(cmd_v1, "srt\"");
 		strcat(cmd_v1, " -d1");
-		fprintf(stderr, "%s are converted with convert_v1.\n", path + strlen(nowRootDir));
-		system(cmd_v1);
-		//redirection(cmd_v1, TMPFILE);
-		//strcpy(grepCmd + strlen(GREP)
+		redirection(cmd_v1, TMPFILE);
+
+		strcpy(grepErrorCmd + strlen(GREP_ERROR), TMPFILE);
+		strcat(grepErrorCmd, "\"");
+		redirection(grepErrorCmd, GREPFILE);
+		if(stat(GREPFILE, &statbuf) < 0){
+			fprintf(stderr, "stat error for %s\n", GREPFILE);
+			exit(1);
+		}
+
+		if(statbuf.st_size > 0)
+			fprintf(errorFp, "%s\n", path);
+		else
+			fprintf(stderr, "%s are converted with convert_v1.\n", path + strlen(nowRootDir));
 	}
 	else{
 		strcpy(cmd_v2 + strlen(CONVERT_V2), path);
 		strcat(cmd_v2, "\"");
-		fprintf(stderr, "%s are converted with convert_v2.\n", path + strlen(nowRootDir));
 
-		dup2(STDOUT_FILENO, STDOUT_SAVE);
-		dup2(testFd, STDOUT_FILENO);
-		system(cmd_v2);
-		dup2(STDOUT_SAVE, STDOUT_FILENO);
+		redirection(cmd_v2, TMPFILE);
 
-		//redirection(cmd_v2, TMPFILE);
+		strcpy(grepErrorCmd + strlen(GREP_ERROR), TMPFILE);
+		strcat(grepErrorCmd, "\"");
+		redirection(grepErrorCmd, GREPFILE);
+		if(stat(GREPFILE, &statbuf) < 0){
+			fprintf(stderr, "stat error for %s\n", GREPFILE);
+			exit(1);
+		}
+
+		if(statbuf.st_size > 0)
+			fprintf(errorFp, "%s\n", path);
+		else
+			fprintf(stderr, "%s are converted with convert_v2.\n", path + strlen(nowRootDir));
 	}
 	return;
 }
@@ -188,8 +207,8 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "open error for %s\n", "convert_v2.txt");
 		exit(1);
 	}
-	if((errorFd = open(ERRFILE, O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
-		fprintf(stderr, "open error for %s\n", ERRFILE);
+	if((errorFp = fopen(ERRFILE, "a+")) < 0){
+		fprintf(stderr, "fopen error for %s\n", ERRFILE);
 		exit(1);
 	}
 	int logFd;
@@ -219,7 +238,7 @@ int main(int argc, char *argv[])
 		search_directory(nowPath);
 	}
 	close(logFd);
-	close(errorFd);
+	fclose(errorFp);
 	dup2(STDERR_SAVE, STDERR_FILENO);
 	close(testFd);
 	exit(0);
