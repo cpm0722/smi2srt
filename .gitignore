@@ -1,6 +1,8 @@
 *.tmp
 *.o
 log.txt
+time.txt
+error.txt
 test/
 smi/
 smi_bak/

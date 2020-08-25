@@ -4,12 +4,14 @@
 #include <fcntl.h>
 #include <dirent.h>
 #include <string.h>
+#include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
 #define PATH_LEN 2048
 #define FILE_LEN 128
 #define CMD_LEN PATH_LEN * 2 + 20
+#define TIME_LEN 40
 
 #define CONVERT_V1 "./convert_v1 \""
 #define CONVERT_V2 "/usr/local/bin/smi2srt -n \""
@@ -19,6 +21,7 @@
 #define TMPFILE "tmp.tmp"
 #define LOGFILE "log.txt"
 #define ERRFILE "error.txt"
+#define TIMEFILE "time.txt"
 
 #define STDOUT_SAVE 100
 #define STDERR_SAVE 101
@@ -39,6 +42,9 @@ char backupDir[PATH_LEN];
 int testFd;
 FILE *errorFp;
 
+time_t startTime;
+time_t lastTime;
+char strTime[TIME_LEN];
 
 void redirection(char *cmd, const char *tmpFile)
 {
@@ -95,18 +101,15 @@ void smi2srt(char path[PATH_LEN])
 
 		redirection(cmd_v2, TMPFILE);
 
-		strcpy(grepErrorCmd + strlen(GREP_ERROR), TMPFILE);
-		strcat(grepErrorCmd, "\"");
-		redirection(grepErrorCmd, GREPFILE);
-		if(stat(GREPFILE, &statbuf) < 0){
-			fprintf(stderr, "stat error for %s\n", GREPFILE);
+		if(stat(TMPFILE, &statbuf) < 0){
+			fprintf(stderr, "stat error for %s\n", TMPFILE);
 			exit(1);
 		}
 
 		if(statbuf.st_size > 0)
-			fprintf(errorFp, "%s\n", path);
-		else
 			fprintf(stderr, "%s are converted with convert_v2.\n", path + strlen(nowRootDir));
+		else
+			fprintf(errorFp, "%s\n", path);
 	}
 	return;
 }
@@ -154,8 +157,10 @@ void search_directory(char *path)
 			fprintf(stderr, "stat error for %s\n", nowPath);
 			exit(1);
 		}
-		if(S_ISDIR(statbuf.st_mode))
-			search_directory(nowPath);
+		if(S_ISDIR(statbuf.st_mode)){
+			if(statbuf.st_mtime > lastTime)
+				search_directory(nowPath);
+		}
 		else{
 			if(!strcmp(nowPath+strlen(nowPath)-4, ".smi") || !strcmp(nowPath+strlen(nowPath)-4, ".SMI")){
 				smi2srt(nowPath);
@@ -203,14 +208,26 @@ void get_abs_path(char result[PATH_LEN], char *path)
 
 int main(int argc, char *argv[])
 {
-	if((testFd = open("convert_v2.txt", O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
-		fprintf(stderr, "open error for %s\n", "convert_v2.txt");
-		exit(1);
+	startTime = time(NULL);
+	ctime_r(&startTime, strTime);
+	strTime[strlen(strTime)-1] = '\0';
+	if(access(TIMEFILE, F_OK) < 0)
+		startTime = 0;
+	else{
+		FILE *timeFp; 
+		if((timeFp = fopen(TIMEFILE, "r")) < 0){
+			fprintf(stderr, "fopen error for %s\n", TIMEFILE);
+			exit(1);
+		}
+		fscanf(timeFp, "%u", &lastTime);
+		fprintf(stderr, "lastTime: %u\n", lastTime);
 	}
+
 	if((errorFp = fopen(ERRFILE, "a+")) < 0){
 		fprintf(stderr, "fopen error for %s\n", ERRFILE);
 		exit(1);
 	}
+
 	int logFd;
 	if((logFd = open(LOGFILE, O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
 		fprintf(stderr, "open error for %s\n", LOGFILE);
@@ -218,7 +235,11 @@ int main(int argc, char *argv[])
 	}
 	dup2(STDERR_FILENO, STDERR_SAVE);
 	dup2(logFd, STDERR_FILENO);
+
 	getcwd(pwd, PATH_LEN);
+
+	fprintf(stderr, "*** [%s] start ***\n", strTime);
+
 	for(int i = 1; i < argc; i++){
 		if(!strcmp(argv[i], "-b")){
 			backup = true;
@@ -227,6 +248,7 @@ int main(int argc, char *argv[])
 			break;
 		}
 	}
+
 	for(int i = 1; i < argc; i++){
 		if(!strcmp(argv[i], "-b")){
 			i++;
@@ -237,9 +259,20 @@ int main(int argc, char *argv[])
 		strcpy(nowRootDir, nowPath);
 		search_directory(nowPath);
 	}
+
 	close(logFd);
 	fclose(errorFp);
+
+	FILE *timeFp;
+	if((timeFp = fopen(TIMEFILE, "w")) < 0){
+		fprintf(stderr, "fopen error for %s\n", TIMEFILE);
+		exit(1);
+	}
+	time_t now = time(NULL);
+	fprintf(timeFp, "%u\n", now);
+	fclose(timeFp);
+
 	dup2(STDERR_SAVE, STDERR_FILENO);
-	close(testFd);
+
 	exit(0);
 }
