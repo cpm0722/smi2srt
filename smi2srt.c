@@ -131,12 +131,15 @@ void mkdir_recursive(char path[PATH_LEN])
 	}
 	if(access(path, F_OK) < 0){				//path 디렉터리가 없을 경우
 		char parentPath[PATH_LEN];			//parentPath에 부모 디렉터리 경로 저장
+		memset(parentPath, '\0', PATH_LEN);
 		strncpy(parentPath, path, i);
 		if(access(parentPath, F_OK) < 0)	//부모 디렉터리 없을 경우
 			mkdir_recursive(parentPath);	//재귀 호출
 	}
 	if(mkdir(path, 0755) < 0)				//path 디렉터리 mkdir
 		fprintf(stderr, "mkdir error for %s\n", path);
+	else
+		fprintf(stderr, "mkdir %s\n", path);
 
 	return;
 }
@@ -194,9 +197,8 @@ void search_directory(char *path)
 					strcpy(fname, backupPath+i+1);
 
 					if(access(backupPath, F_OK) < 0){	//부모 디렉터리가 없을 경우
-						fprintf(stderr, "mkdir %s\n", backupPath);
 						char tmp[PATH_LEN];
-						strcpy(tmp, backupPath);
+						strncpy(tmp, backupPath, i + 1);
 						mkdir_recursive(tmp);			//mkdir_recursive 호출
 					}
 
