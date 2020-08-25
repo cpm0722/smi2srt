@@ -27,7 +27,7 @@ from Hansu Kim (cpm0722@kakao.com)
 
 1. git 설치
 
-    1. nas 웹페이지 → 패키지 센터 → Git Server 제거
+    1. DSM → 패키지 센터 → Git Server 제거
     
     1. 패키지 센터 → 설정 → 패키지 소스 → 추가
 
@@ -37,12 +37,14 @@ from Hansu Kim (cpm0722@kakao.com)
     1. 패키지 센터 → 커뮤니티 → 새로 고침
     
     1. Git 설치
+        
+        - 설치 오류 발생할 경우 패키지 센터 → 설정 → 신뢰 수준 Synology Inc. 및 신뢰할 수 있는 게시자로 변경
     
         [참고](https://blog.acidpop.kr/228)
 
 1. node_js 설치
 
-    - nas 웹페이지 → 패키지 센터 → 커뮤니티 → Node.js v8 설치
+    - DSM → 패키지 센터 → 커뮤니티 → Node.js v8 설치
     
 1. npm 실행 설정
 
@@ -127,4 +129,4 @@ from Hansu Kim (cpm0722@kakao.com)
 
 George Shuklin
 
-axfree
+axfree [axfree/smi2srt](https://github.com/axfree/smi2srt)
