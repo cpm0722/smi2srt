@@ -17,6 +17,7 @@
 #define GREPFILE "grep.tmp"
 #define TMPFILE "tmp.tmp"
 #define LOGFILE "log.txt"
+#define ERRFILE "error.txt"
 
 #define STDOUT_SAVE 100
 #define STDERR_SAVE 101
@@ -34,6 +35,7 @@ char nowRootDir[PATH_LEN];
 char backupDir[PATH_LEN];
 
 int testFd;
+int errorFd;
 
 
 void redirection(char *cmd, const char *tmpFile)
@@ -71,7 +73,9 @@ void smi2srt(char path[PATH_LEN])
 		strcat(cmd_v1, "srt\"");
 		strcat(cmd_v1, " -d1");
 		fprintf(stderr, "%s are converted with convert_v1.\n", path + strlen(nowRootDir));
-		redirection(cmd_v1, TMPFILE);
+		system(cmd_v1);
+		//redirection(cmd_v1, TMPFILE);
+		//strcpy(grepCmd + strlen(GREP)
 	}
 	else{
 		strcpy(cmd_v2 + strlen(CONVERT_V2), path);
@@ -184,6 +188,10 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "open error for %s\n", "convert_v2.txt");
 		exit(1);
 	}
+	if((errorFd = open(ERRFILE, O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
+		fprintf(stderr, "open error for %s\n", ERRFILE);
+		exit(1);
+	}
 	int logFd;
 	if((logFd = open(LOGFILE, O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
 		fprintf(stderr, "open error for %s\n", LOGFILE);
@@ -211,6 +219,7 @@ int main(int argc, char *argv[])
 		search_directory(nowPath);
 	}
 	close(logFd);
+	close(errorFd);
 	dup2(STDERR_SAVE, STDERR_FILENO);
 	close(testFd);
 	exit(0);
