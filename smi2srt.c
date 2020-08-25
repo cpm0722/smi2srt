@@ -281,10 +281,17 @@ int main(int argc, char *argv[])
 			i++;							//직후 인자도 skip
 			continue;
 		}
-		char nowPath[PATH_LEN];				//현재 인자의 절대 경로 저장
+		char nowPath[PATH_LEN];							//현재 인자의 절대 경로 저장
 		get_abs_path(nowPath, argv[i]);
-		strcpy(nowRootDir, nowPath);		//현재 인자의 절대 경로 nowRootDir에 저장
-		search_directory(nowPath);			//search_directory 호출
+		strcpy(nowRootDir, nowPath);					//현재 인자의 절대 경로 nowRootDir에 저장
+		for(int i = strlen(nowRootDir); i >= 0; i--)	//현재 인자의 부모 디렉터리 경로로 변경
+			if(nowRootDir[i] == '/'){
+				nowRootDir[i] = '\0';
+				break;
+			}
+
+		search_directory(nowPath);						//search_directory 호출
+
 	}
 
 	close(logFd);
