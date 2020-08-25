@@ -28,7 +28,8 @@
 
 typedef enum {false, true} bool;
 
-bool backup = false;	//-b 옵션 여부 저장
+bool backup = false;			//-b 옵션 여부 저장
+bool noTimeSave = false;		//-nts 옵션 여부 저장
 
 char cmd_v1[CMD_LEN] = CONVERT_V1;			//convert_v1 명령어 저장
 char cmd_v2[CMD_LEN] = CONVERT_V2;			//convert_v2 명령어 저장
@@ -191,7 +192,14 @@ void search_directory(char *path)
 		else{									//현재 파일이 디렉터리가 아닌 일반 파일인 경우
 			if(!strcmp(nowPath+strlen(nowPath)-4, ".smi") || !strcmp(nowPath+strlen(nowPath)-4, ".SMI")){	//확장자가 smi 또는 SMI인 경우
 
-				smi2srt(nowPath);				//smi2srt 호출
+				char srtPath[PATH_LEN];			//srt 경로 생성
+				strcpy(srtPath, nowPath);
+				strcpy(srtPath + strlen(srtPath)-3, "srt");
+
+				if(access(srtPath, F_OK) < 0)	//srt 파일이 없을 경우에만
+					smi2srt(nowPath);				//smi2srt 호출
+				else
+					fprintf(stderr, "%s already exists.\n", srtPath);
 
 				if(backup){						//-b옵션일 경우
 
@@ -219,8 +227,13 @@ void search_directory(char *path)
 					strcat(backupPath, "/");			//부모 디렉터리 경로가 아닌 전체 경로로 복원
 					strcat(backupPath, fname);
 
-					if(rename(nowPath, backupPath)<0)	//backup 디렉터리로 mv
+					if(rename(nowPath, backupPath)<0){	//backup 디렉터리로 mv
 						fprintf(stderr, "rename error for %s\n", backupPath);
+						if(access(nowPath, W_OK) < 0)
+							fprintf(stderr, "access error for %s\n", nowPath);
+						if(access(backupPath, W_OK) < 0)
+							fprintf(stderr, "access error for %s\n", backupPath);
+					}
 				}
 			}
 		}
@@ -280,16 +293,17 @@ int main(int argc, char *argv[])
 
 	getcwd(pwd, PATH_LEN);					//현재 경로 획득해 pwd에 저장
 
-	fprintf(stderr, "*** [%s] start ***\n", strTime);	//LOGFILE에 현재 시각 write
-	fprintf(errorFp, "*** [%s] start ***\n", strTime);	//ERRFILE에 현재 시각 write
+	fprintf(stderr, "\n*** [%s] start ***\n\n", strTime);	//LOGFILE에 현재 시각 write
+	fprintf(errorFp, "\n*** [%s] start ***\n\n", strTime);	//ERRFILE에 현재 시각 write
 
-	for(int i = 1; i < argc; i++){			//-b 옵션 있는지 탐색
+	for(int i = 1; i < argc; i++){			//옵션 있는지 탐색
 		if(!strcmp(argv[i], "-b")){			//-b 옵션일 경우
 			backup = true;					//backup = true
 			get_abs_path(backupDir, argv[++i]);	//-b 직후 인자의 절대 경로 구해 backupDir에 저장
 			fprintf(stderr, "backup: %s\nbackupDir: %s\n", backup?"true":"false", backupDir);
-			break;
 		}
+		else if(!strcmp(argv[i], "-nts"))	//-nts 옵션일 경우
+			noTimeSave = true;				//backup = true
 	}
 
 	for(int i = 1; i < argc; i++){			//인자 탐색하며 search_directory 호출
@@ -297,6 +311,8 @@ int main(int argc, char *argv[])
 			i++;							//직후 인자도 skip
 			continue;
 		}
+		else if(!strcmp(argv[i], "-nts"))	//-nts 옵션일 경우
+			continue;
 		char nowPath[PATH_LEN];							//현재 인자의 절대 경로 저장
 		get_abs_path(nowPath, argv[i]);
 		strcpy(nowRootDir, nowPath);					//현재 인자의 절대 경로 nowRootDir에 저장
@@ -313,16 +329,18 @@ int main(int argc, char *argv[])
 	close(logFd);
 	fclose(errorFp);
 
-	int timeFd;
-	if((timeFd = open(TIMEFILE, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0){	//TIMEFILE write 권한으로 open
-		fprintf(stderr, "open error for %s\n", TIMEFILE);
-		exit(1);
+	if(!noTimeSave){	//nts 옵션 false일 경우에만
+		int timeFd;
+		if((timeFd = open(TIMEFILE, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0){	//TIMEFILE write 권한으로 open
+			fprintf(stderr, "open error for %s\n", TIMEFILE);
+			exit(1);
+		}
+		time_t now = time(NULL);
+		if(write(timeFd, &now, sizeof(time_t)) <= 0){			//현재 시각 TIMEFILE에 write
+			fprintf(stderr, "write error for %s\n", TIMEFILE);
+		}
+		close(timeFd);
 	}
-	time_t now = time(NULL);
-	if(write(timeFd, &now, sizeof(time_t)) <= 0){				//현재 시각 TIMEFILE에 write
-		fprintf(stderr, "write error for %s\n", TIMEFILE);
-	}
-	close(timeFd);
 
 	dup2(STDERR_SAVE, STDERR_FILENO);							//stderr 복원
 
