@@ -5,6 +5,7 @@ from Hansu Kim (cpm0722@kakao.com)
 ## 주요 기능
 - 특정 디렉터리를 재귀적으로 탐색(하위 폴더 전부)하여 smi 파일을 찾아 srt 파일로 변경
 - -b 옵션을 사용해 smi 파일들을 백업 가능
+- -nts 옵션을 사용해 프로그램 실행 시각 갱신하지 않음
 - 주기적 실행할 때 연산량 감소 위해 폴더 수정 시각과 이전 실행 시각 비교해 이후 갱신되었는지 판단해 실행
 - 실행 내역에 대한 로그 파일 log.txt 생성
 - 에러 발생 내역에 대한 로그 파일 error.txt 생성
@@ -100,32 +101,41 @@ from Hansu Kim (cpm0722@kakao.com)
 ## 구현
 
 1. 이전 실행 내역 있는지 판단
-2. -b 옵션 여부 판단
-3. 인자로 받은 경로들에 대해 재귀 탐색 (search_directory)
+1. -b 옵션 여부 판단
+1. 인자로 받은 경로들에 대해 재귀 탐색 (search_directory)
     1. 디렉터리인 경우 재귀 호출
-    2. smi 파일인 경우
+    1. smi 파일인 경우
         1.  변환 수행 (smi2srt)
             - grep <body> 수행
                 1. grep <body>의 결과가 있는 경우
                     1. convert_v1 실행
-                    2. 실행 후 출력 결과에서 grep <Error> 수행
+                    1. 실행 후 출력 결과에서 grep <Error> 수행
                         1. grep <Error>의 결과가 없는 경우
                             - log.txt에 성공 log 추가
-                        2. grep <Error>의 결과가 있는 경우
+                        1. grep <Error>의 결과가 있는 경우
                             - error.txt에 에러 log 추가
-                2. grep <body>의 결과가 없는 경우
+                1. grep <body>의 결과가 없는 경우
                     - convert_v2 실행
                         1. 실행 후 출력 결과가 있는 경우
                             - log.txt에 성공 log 추가
-                        2. 실행 후 출력 결과가 없는 경우
+                        1. 실행 후 출력 결과가 없는 경우
                             - error.txt에 에러 log 추가
-        2. -b 옵션 판단
+        1. -b 옵션 판단
             - -b 옵션인 경우
                 1. 백업 경로 생성
                 2. 백업 경로의 부모 디렉터리에 대해 재귀적으로 생성 (mkdir_recursive)
                 3. 백업 경로로 smi 파일 이동
-  
+    1. 인자로 받은 경로들에 대해 재귀 탐색 (search_directory)
+    1. 디렉터리인 경우 재귀 호출
+    1. smi 파일인 경우
+1. -nts 옵션 여부 판단
+    1. -nts true인 경우
+        - time.txt 파일에 프로그램 실행 시각 저장 X
+    1. -nts false인 경우
+        - time.txt 파일에 프로그램 실행 시각 저장 O
 ## 라이센스
+    
+ cpm0722
 
 George Shuklin
 
