@@ -2,6 +2,8 @@
 
 from Hansu Kim (cpm0722@kakao.com)
 
+# [Notion Page Link](https://www.notion.so/cpm0722/smi2srt-for-plex-in-synology-7972146aa67f4f27ac2d08991c477839)
+
 ## 주요 기능
 - 특정 디렉터리를 재귀적으로 탐색(하위 폴더 전부)하여 smi 파일을 찾아 srt 파일로 변경
 - -b 옵션을 사용해 smi 파일들을 백업 가능
@@ -72,32 +74,6 @@ from Hansu Kim (cpm0722@kakao.com)
     sudo npm install smi2srt -g
     ```
 
-## 실행 방법
-
-1. 실행 파일 생성
-    - gcc를 통해 smi2srt.c 파일을 complie해 smi2srt 실행 파일 생성 (실행 환경 종속성 회피하기 위함)
-
-    ```bash
-    make start
-    ```
-
-1. 실행
-    1. smi 파일 백업 X
-        - 탐색경로들을 모두 탐색하며 smi 파일을 찾아 srt파일로 변경
-        - smi 파일은 삭제되지 않음
-
-        ```bash
-        ./smi2srt [탐색경로1] [탐색경로2] ... [탐색경로n]
-        ```
-
-    1. smi 파일 백업 O
-        - 탐색 경로들을 모두 탐색하며 smi 파일을 찾아 srt 파일로 변경
-        - smi 파일들은 백업 디렉터리 하위에 같은 경로로 디렉터리가 생성되어 모두 이동됨
-
-        ```bash
-        ./smi2srt -b [백업경로] [탐색경로1] [탐색경로2] ... [탐색경로n]
-        ```
-
 ## 구현
 
 1. 이전 실행 내역 있는지 판단
@@ -133,6 +109,63 @@ from Hansu Kim (cpm0722@kakao.com)
         - time.txt 파일에 프로그램 실행 시각 저장 X
     1. -nts false인 경우
         - time.txt 파일에 프로그램 실행 시각 저장 O
+
+## 실행 방법
+
+1. 실행 파일 생성
+    - gcc를 통해 smi2srt.c 파일을 complie해 smi2srt 실행 파일 생성 (실행 환경 종속성 회피하기 위함)
+
+    ```bash
+    make start
+    ```
+
+1. 실행
+    1. smi 파일 백업 X
+        - 탐색경로들을 모두 탐색하며 smi 파일을 찾아 srt파일로 변경
+        - smi 파일은 삭제되지 않음
+
+        ```bash
+        ./smi2srt [탐색경로1] [탐색경로2] ... [탐색경로n]
+        ```
+
+    1. smi 파일 백업 O
+        - 탐색 경로들을 모두 탐색하며 smi 파일을 찾아 srt 파일로 변경
+        - smi 파일들은 백업 디렉터리 하위에 같은 경로로 디렉터리가 생성되어 모두 이동됨
+
+        ```bash
+        ./smi2srt -b [백업경로] [탐색경로1] [탐색경로2] ... [탐색경로n]
+        ```
+
+## Synology 작업 스케줄 등록
+
+1. 스크립트 파일 작성
+    - 예제
+
+        ```bash
+        ./smi2srt -nts -b [volume1 백업 디렉터리 경로] [volume1 경로1] [volume1 경
+        로2] ... [volume1 경로n]
+        ./smi2srt -nts -b [volume2 백업 디렉터리 경로] [volume2 경로1] [volume2 경
+        로2] ... [volume2 경로n]
+        ...
+        ./smi2srt -b [volume N 백업 디렉터리 경로] [volume N 경로1] [volume N 경
+        로2] ... [volume N 경로n]
+        ```
+
+        - volume마다 별도로 실행해야 함
+        - 마지막 실행을 제외하고는 모두 -nts 옵션을 붙여 실행시간을 갱신하지 않음
+2. DSM → 제어판 → 작업 스케줄러 → 생성 → 예약된 작업 → 사용자 정의 스크립트
+3. 일반 탭
+    1. 작업: 작업명 지정
+    2. 사용자: root
+    3. 활성화됨 체크
+4. 스케줄 탭
+    - 시간 및 주기 지정
+5. 작업 설정 탭
+    - 실행 명령에 스크립트 경로 지정
+
+        ```bash
+        bash /스크립트 파일 절대 경로
+        ```
 ## 라이센스
     
  cpm0722
