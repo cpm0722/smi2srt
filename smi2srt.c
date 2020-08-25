@@ -109,8 +109,22 @@ void smi2srt(char path[PATH_LEN])
 			fprintf(stderr, "stat error for %s\n", TMPFILE);
 			exit(1);
 		}
-		if(statbuf.st_size > 0)						//TMPFILE의 size 0 이상인 경우 (convert_v2 정상 수행된 경우)
+		if(statbuf.st_size > 0){					//TMPFILE의 size 0 이상인 경우 (convert_v2 정상 수행된 경우)
 			fprintf(stderr, "%s are converted with convert_v2.\n", path + strlen(nowRootDir));	//log.txt에 추가
+
+			char src[PATH_LEN];						//ko.srt 파일 경로
+			strcpy(src, path);
+			src[strlen(path)-3] = '\0';
+			strcat(src, "ko.srt");
+
+			char dst[PATH_LEN];						//.srt 파일 경로
+			strcpy(dst, path);
+			dst[strlen(path)-3] = '\0';
+			strcat(dst, "srt");
+
+			if(rename(src, dst)<0)					//ko.srt rename
+				fprintf(stderr, "rename error for %s\n", src);
+		}
 		else										//TMPFILE의 size 0인 경우 (convert_v2 error 발생한 경우)
 			fprintf(errorFp, "%s\n", path);			//error.txt에 추가
 	}
