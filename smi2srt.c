@@ -12,7 +12,10 @@
 #define CMD_LEN PATH_LEN * 2 + 20
 
 #define CONVERT_V1 "./convert_v1 \""
-#define TMPFILE "smi2srt.tmp"
+#define CONVERT_V2 "/usr/local/bin/smi2srt -n \""
+#define GREP "grep -i \"<body>\" \""
+#define GREPFILE "grep.tmp"
+#define TMPFILE "tmp.tmp"
 #define LOGFILE "log.txt"
 
 #define STDOUT_SAVE 100
@@ -22,20 +25,23 @@ typedef enum {false, true} bool;
 
 bool backup = false;
 
-char cmd[CMD_LEN] = CONVERT_V1;
+char cmd_v1[CMD_LEN] = CONVERT_V1;
+char cmd_v2[CMD_LEN] = CONVERT_V2;
+char grepCmd[CMD_LEN] = GREP;
 
 char pwd[PATH_LEN];
-char tmpFile[PATH_LEN];
 char nowRootDir[PATH_LEN];
 char backupDir[PATH_LEN];
 
-int tmpFd;
+int testFd;
 
-void redirection(char *cmd)
+
+void redirection(char *cmd, const char *tmpFile)
 {
+	int tmpFd;
 	if((tmpFd = open(tmpFile, O_RDWR | O_CREAT | O_TRUNC, 0644)) < 0){
 		fprintf(stderr, "open error for %s\n", tmpFile);
-		return;
+		exit(1);
 	}
 	dup2(STDOUT_FILENO, STDOUT_SAVE);
 	dup2(tmpFd, STDOUT_FILENO);
@@ -47,13 +53,38 @@ void redirection(char *cmd)
 
 void smi2srt(char path[PATH_LEN])
 {
-	strcpy(cmd + strlen(CONVERT_V1), path);
-	strcat(cmd, "\" \"");
-	strncat(cmd, path, strlen(path)-3);
-	strcat(cmd, "srt\"");
-	strcat(cmd, " -d1");
-	//fprintf(stderr, "cmd: %s\n", cmd);
-	//system(cmd);
+	//fprintf(stderr, "cmd_v1: %s\n", cmd_v1);
+	strcpy(grepCmd + strlen(GREP), path);
+	strcat(grepCmd, "\"");
+	redirection(grepCmd, GREPFILE);
+
+	struct stat statbuf;
+	if(stat(GREPFILE, &statbuf) < 0){
+		fprintf(stderr, "stat error for %s\n", GREPFILE);
+		exit(1);
+	}
+
+	if(statbuf.st_size > 0){
+		strcpy(cmd_v1 + strlen(CONVERT_V1), path);
+		strcat(cmd_v1, "\" \"");
+		strncat(cmd_v1, path, strlen(path)-3);
+		strcat(cmd_v1, "srt\"");
+		strcat(cmd_v1, " -d1");
+		fprintf(stderr, "%s are converted with convert_v1.\n", path + strlen(nowRootDir));
+		redirection(cmd_v1, TMPFILE);
+	}
+	else{
+		strcpy(cmd_v2 + strlen(CONVERT_V2), path);
+		strcat(cmd_v2, "\"");
+		fprintf(stderr, "%s are converted with convert_v2.\n", path + strlen(nowRootDir));
+
+		dup2(STDOUT_FILENO, STDOUT_SAVE);
+		dup2(testFd, STDOUT_FILENO);
+		system(cmd_v2);
+		dup2(STDOUT_SAVE, STDOUT_FILENO);
+
+		//redirection(cmd_v2, TMPFILE);
+	}
 	return;
 }
 
@@ -149,17 +180,18 @@ void get_abs_path(char result[PATH_LEN], char *path)
 
 int main(int argc, char *argv[])
 {
+	if((testFd = open("convert_v2.txt", O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
+		fprintf(stderr, "open error for %s\n", "convert_v2.txt");
+		exit(1);
+	}
 	int logFd;
 	if((logFd = open(LOGFILE, O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){
 		fprintf(stderr, "open error for %s\n", LOGFILE);
-		return 1;
+		exit(1);
 	}
 	dup2(STDERR_FILENO, STDERR_SAVE);
 	dup2(logFd, STDERR_FILENO);
 	getcwd(pwd, PATH_LEN);
-	strcpy(tmpFile, pwd);
-	strcat(tmpFile, "/");
-	strcat(tmpFile, TMPFILE);
 	for(int i = 1; i < argc; i++){
 		if(!strcmp(argv[i], "-b")){
 			backup = true;
@@ -180,5 +212,6 @@ int main(int argc, char *argv[])
 	}
 	close(logFd);
 	dup2(STDERR_SAVE, STDERR_FILENO);
+	close(testFd);
 	exit(0);
 }
