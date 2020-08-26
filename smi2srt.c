@@ -37,6 +37,7 @@ char grepCmd[CMD_LEN] = GREP;				//grep <body> 명령어 저장
 char grepErrorCmd[CMD_LEN] = GREP_ERROR;	//grep Error 명령어 저장
 
 char pwd[PATH_LEN];				//현재 실행 경로 저장
+
 char nowRootDir[PATH_LEN];		//명령어 인자로 넘겨받은 경로의 절대 경로 저장
 char backupDir[PATH_LEN];		//-b 옵션 시 인자로 넘겨받은 backup 디렉터리의 절대 경로 저장
 
@@ -258,6 +259,23 @@ void get_abs_path(char result[PATH_LEN], char *path)
 
 int main(int argc, char *argv[])
 {
+	getcwd(pwd, PATH_LEN);					//현재 경로 획득해 pwd에 저장
+
+	for(int i = 1; i < argc; i++){			//옵션 있는지 탐색
+		if(!strcmp(argv[i], "-b")){			//-b 옵션일 경우
+			backup = true;					//backup = true
+			get_abs_path(backupDir, argv[++i]);	//-b 직후 인자의 절대 경로 구해 backupDir에 저장
+			fprintf(stderr, "backup: %s\nbackupDir: %s\n", backup?"true":"false", backupDir);
+		}
+		else if(!strcmp(argv[i], "-nts"))	//-nts 옵션일 경우
+			noTimeSave = true;				//backup = true
+		else if(!strcmp(argv[i], "-pwd")){
+			get_abs_path(pwd, argv[++i]);
+			fprintf(stderr, "pwd: %s\n", pwd);
+			if(chdir(pwd) < 0)
+				fprintf(stderr, "chdir error for %s\n", pwd);
+		}
+	}
 
 	startTime = time(NULL);			//시작 시간 startTime에 저장
 	ctime_r(&startTime, strTime);	//시작 시간 문자열로 strTime에 저장
@@ -291,23 +309,15 @@ int main(int argc, char *argv[])
 	dup2(STDERR_FILENO, STDERR_SAVE);		//STDERR을 LOGFILE으로 변경
 	dup2(logFd, STDERR_FILENO);
 
-	getcwd(pwd, PATH_LEN);					//현재 경로 획득해 pwd에 저장
-
 	fprintf(stderr, "\n*** [%s] start ***\n\n", strTime);	//LOGFILE에 현재 시각 write
 	fprintf(errorFp, "\n*** [%s] start ***\n\n", strTime);	//ERRFILE에 현재 시각 write
 
-	for(int i = 1; i < argc; i++){			//옵션 있는지 탐색
-		if(!strcmp(argv[i], "-b")){			//-b 옵션일 경우
-			backup = true;					//backup = true
-			get_abs_path(backupDir, argv[++i]);	//-b 직후 인자의 절대 경로 구해 backupDir에 저장
-			fprintf(stderr, "backup: %s\nbackupDir: %s\n", backup?"true":"false", backupDir);
-		}
-		else if(!strcmp(argv[i], "-nts"))	//-nts 옵션일 경우
-			noTimeSave = true;				//backup = true
-	}
-
 	for(int i = 1; i < argc; i++){			//인자 탐색하며 search_directory 호출
 		if(!strcmp(argv[i], "-b")){			//-b 옵션일 경우
+			i++;							//직후 인자도 skip
+			continue;
+		}
+		else if(!strcmp(argv[i], "-pwd")){	//-pwd 옵션일 경우
 			i++;							//직후 인자도 skip
 			continue;
 		}
