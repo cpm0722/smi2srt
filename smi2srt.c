@@ -309,8 +309,15 @@ int main(int argc, char *argv[])
 	dup2(STDERR_FILENO, STDERR_SAVE);		//STDERR을 LOGFILE으로 변경
 	dup2(logFd, STDERR_FILENO);
 
-	fprintf(stderr, "\n*** [%s] start ***\n\n", strTime);	//LOGFILE에 현재 시각 write
-	fprintf(errorFp, "\n*** [%s] start ***\n\n", strTime);	//ERRFILE에 현재 시각 write
+	fprintf(stderr, "\n*** [%s] start ***\n", strTime);	//LOGFILE에 현재 시각 write
+	fprintf(errorFp, "\n*** [%s] start ***\n", strTime);	//ERRFILE에 현재 시각 write
+
+	for(int i = 0; i < argc; i++){				//LOGFILE과 ERRFILE에 명령어 write
+		fprintf(stderr, "%s ", argv[i]);
+		fprintf(errorFp, "%s ", argv[i]);
+	}
+	fprintf(stderr, "\n\n");
+	fprintf(errorFp, "\n\n");
 
 	for(int i = 1; i < argc; i++){			//인자 탐색하며 search_directory 호출
 		if(!strcmp(argv[i], "-b")){			//-b 옵션일 경우
