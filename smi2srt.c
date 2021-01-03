@@ -70,24 +70,8 @@ void smi2srt(char path[PATH_LEN])
 		fprintf(stderr, "stat error for %s\n", TMPFILE);
 		exit(1);
 	}
-	if(statbuf.st_size > 0){					//TMPFILE의 size 0 이상인 경우 (CONVERT 정상 수행된 경우)
+	if(statbuf.st_size > 0)						//TMPFILE의 size 0 이상인 경우 (CONVERT 정상 수행된 경우)
 		fprintf(stderr, "%s are converted.\n", path + strlen(nowRootDir));	//log.txt에 추가
-
-		/*
-		char src[PATH_LEN];						//ko.srt 파일 경로
-		strcpy(src, path);
-		src[strlen(path)-3] = '\0';
-		strcat(src, "ko.srt");
-
-		char dst[PATH_LEN];						//.srt 파일 경로
-		strcpy(dst, path);
-		dst[strlen(path)-3] = '\0';
-		strcat(dst, "srt");
-
-		if(rename(src, dst)<0)					//ko.srt rename
-			fprintf(stderr, "rename error for %s\n", src);
-		*/
-	}
 	else										//TMPFILE의 size 0인 경우 (CONVERT error 발생한 경우)
 		fprintf(errorFp, "%s\n", path);			//error.txt에 추가
 
@@ -220,8 +204,10 @@ void get_abs_path(char result[PATH_LEN], char *path)
 
 int main(int argc, char *argv[])
 {
+#ifdef DEBUG
 	struct timeval start_tv, end_tv;
 	gettimeofday(&start_tv, NULL);			//시작 시간 저장
+#endif
 	getcwd(pwd, PATH_LEN);					//현재 경로 획득해 pwd에 저장
 
 	for(int i = 1; i < argc; i++){			//옵션 있는지 탐색
@@ -324,9 +310,10 @@ int main(int argc, char *argv[])
 
 	dup2(STDERR_SAVE, STDERR_FILENO);							//stderr 복원
 
+#ifdef DEBUG
 	gettimeofday(&end_tv, NULL);			//종료 시간 저장
-
 	fprintf(stderr, "process time: %lld\n", end_tv.tv_sec - start_tv.tv_sec);
+#endif
 
 	exit(0);
 }
