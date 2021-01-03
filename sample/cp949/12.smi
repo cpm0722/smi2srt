@@ -1,0 +1,498 @@
+<SAMI>
+<HEAD>
+<TITLE>[Judas] Zero no Tsukaima S01E12</TITLE>
+<SAMIParam>
+  Metrics {time:ms;}
+  Spec {MSFT:1.0;}
+</SAMIParam>
+<STYLE TYPE="text/css">
+<!--
+P { margin-left:8pt; margin-right:8pt; margin-bottom:2pt;
+    margin-top:2pt; font-size:9pt; text-align:center;
+    font-family:system; font-weight:normal; color:beige;
+    background-color:black; }
+.KRCC { Name:한국어; lang:ko-KR; SAMIType:CC; }
+#STDPrn { Name:Standard Print; }
+#LargePrn { Name:Large Print; font-size:9pt; }
+#SmallPrn { Name:Small Print; font-size:14pt; }
+-->
+</STYLE>
+</HEAD>
+<BODY>
+<-- Open play menu, choose Captions and Subtiles, On if available -->
+<-- Open tools menu, Security, Show local captions when present -->
+<SYNC Start=8100><P Class=KRCC>이것이 웰즈 님의...
+<SYNC Start=11300><P Class=KRCC>&nbsp;
+<SYNC Start=13700><P Class=KRCC>편지를 빼앗기고 눈 앞에서<br>황태자님의 목숨까지...
+<SYNC Start=18600><P Class=KRCC>그 왈드를 알아보지 못한<br>내게 가장 큰 책임이 있다
+<SYNC Start=24600><P Class=KRCC>&nbsp;
+<SYNC Start=28600><P Class=KRCC>자, 얼굴을 들어라<br>루이즈 프랑소와즈
+<SYNC Start=33600><P Class=KRCC>&nbsp;
+<SYNC Start=39300><P Class=KRCC>그 분의 유언과 유품을<br>전해줘서 고맙구나
+<SYNC Start=42400><P Class=KRCC>&nbsp;
+<SYNC Start=46000><P Class=KRCC>고맙다, 루이즈
+<SYNC Start=48800><P Class=KRCC>&nbsp;
+<SYNC Start=52100><P Class=KRCC>공주 전하
+<SYNC Start=53400><P Class=KRCC>&nbsp;
+<SYNC Start=55200><P Class=KRCC><font color=#f86e7b>First kissから始まる</font><br><font color=#fcc5ca>첫키스로 시작하는</font>
+<SYNC Start=58000><P Class=KRCC><font color=#f86e7b>二人の戀のhistory</font><br><font color=#fcc5ca>너와 나의 사랑의 히스토리</font>
+<SYNC Start=61100><P Class=KRCC><font color=#f86e7b>この運命に魔法を掛けた君が突然</font><br><font color=#fcc5ca>이 운명에 마법을 건 네가 갑자기</font>
+<SYNC Start=67900><P Class=KRCC><font color=#f86e7b>現れた</font><br><font color=#fcc5ca>나타난 거야</font>
+<SYNC Start=69600><P Class=KRCC><font color=salmon>제로</font><font color=dodgerblue>의 사역마</font><br><font color=#fcc5ca>Caption by Feelsogood</font>
+<SYNC Start=74400><P Class=KRCC>&nbsp;
+<SYNC Start=75500><P Class=KRCC><font color=#f86e7b>月が二つ消えない空</font><br><font color=#fcc5ca>두 개의 달이 사라지지 않는 하늘</font>
+<SYNC Start=81600><P Class=KRCC><font color=#f86e7b>有り得ないことだよね</font><br><font color=#fcc5ca>말도 안 되는 소리지?</font>
+<SYNC Start=87800><P Class=KRCC><font color=#f86e7b>初めてだよ こんな氣持ち</font><br><font color=#fcc5ca>이런 기분은 처음이었어</font>
+<SYNC Start=93100><P Class=KRCC><font color=#f86e7b>ヤケにここが心地好くなって行く</font><br><font color=#fcc5ca>왜인지 여기가 너무 편하게 느껴져</font>
+<SYNC Start=98900><P Class=KRCC><font color=#f86e7b>もし君がつまずいて落ちこんでも</font><br><font color=#fcc5ca>만약 네가 일이 잘 안풀려 침울해 할 때도</font>
+<SYNC Start=105900><P Class=KRCC><font color=#f86e7b>僕がギュッと君をずっと抱締めて上げる</font><br><font color=#fcc5ca>그 때는 내가 너를 살며시 안아줄게</font>
+<SYNC Start=113600><P Class=KRCC><font color=#f86e7b>Sweet kissまでさめない</font><br><font color=#fcc5ca>달콤한 키스까지 깨지않는</font>
+<SYNC Start=116400><P Class=KRCC><font color=#f86e7b>あの日 出合えた Story</font><br><font color=#fcc5ca>그 날 만났던 이야기</font>
+<SYNC Start=119500><P Class=KRCC><font color=#f86e7b>ほら、君の魔法掛けて</font><br><font color=#fcc5ca>자! 너에게 마법을 걸면</font>
+<SYNC Start=122600><P Class=KRCC><font color=#f86e7b>願いはきっとかなうから</font><br><font color=#fcc5ca>소원은 분명 이뤄질 거야</font>
+<SYNC Start=125900><P Class=KRCC><font color=#f86e7b>First kissから始まる</font><br><font color=#fcc5ca>첫키스로 시작하는</font>
+<SYNC Start=129000><P Class=KRCC><font color=#f86e7b>二人の戀のhistory</font><br><font color=#fcc5ca>너와 나의 사랑의 히스토리</font>
+<SYNC Start=132000><P Class=KRCC><font color=#f86e7b>この運命に魔法を掛けた君が突然</font><br><font color=#fcc5ca>이 운명에 마법을 건 네가 갑자기</font>
+<SYNC Start=138800><P Class=KRCC><font color=#f86e7b>現れた</font><br><font color=#fcc5ca>나타난 거야</font>
+<SYNC Start=140800><P Class=KRCC>&nbsp;
+<SYNC Start=143900><P Class=KRCC><font color=pink>제 12 화</font><br><font color=pink>루이즈의 비보</font>
+<SYNC Start=148900><P Class=KRCC>&nbsp;
+<SYNC Start=152100><P Class=KRCC>또 매번 들어오는<br>가짜 정보는 아닌가?
+<SYNC Start=154900><P Class=KRCC>저는 이번에야말로<br>확실한 정보라 확신을...
+<SYNC Start=158000><P Class=KRCC>&nbsp;
+<SYNC Start=159000><P Class=KRCC>들어와라
+<SYNC Start=160000><P Class=KRCC>&nbsp;
+<SYNC Start=162400><P Class=KRCC>Miss.발리에르
+<SYNC Start=164400><P Class=KRCC>&nbsp;
+<SYNC Start=165000><P Class=KRCC>안녕하세요, 콜베르 선생님
+<SYNC Start=168400><P Class=KRCC>저기, 보고를 드리러 왔습니다
+<SYNC Start=170900><P Class=KRCC>&nbsp;
+<SYNC Start=172100><P Class=KRCC>좋아, 휴가를 인정하지
+<SYNC Start=174600><P Class=KRCC>&nbsp;
+<SYNC Start=176400><P Class=KRCC>며칠정도인가?
+<SYNC Start=178300><P Class=KRCC>타르브 마을이니 늦어도<br>일식일까진 돌아올겁니다
+<SYNC Start=183500><P Class=KRCC>그럼 실례하겠습니다
+<SYNC Start=185200><P Class=KRCC>&nbsp;
+<SYNC Start=193200><P Class=KRCC>콜베르 선생님은 휴가가시나요?
+<SYNC Start=195900><P Class=KRCC>전설의 용이 있는 곳을<br>알아냈다고 하더군
+<SYNC Start=199900><P Class=KRCC>전설의 용?
+<SYNC Start=202100><P Class=KRCC>전에도 전설의 뭐시기를 찾다가<br>바다에 표류했으니 말야
+<SYNC Start=207700><P Class=KRCC>뭐, 믿을 구석은 전혀 없지
+<SYNC Start=210200><P Class=KRCC>그럼 보고를 듣도록 하지
+<SYNC Start=211800><P Class=KRCC>&nbsp;
+<SYNC Start=213400><P Class=KRCC>네
+<SYNC Start=214400><P Class=KRCC>&nbsp;
+<SYNC Start=218900><P Class=KRCC>레콘키스타라...
+<SYNC Start=220700><P Class=KRCC>&nbsp;
+<SYNC Start=221300><P Class=KRCC>귀찮은 일이 될 것 같군
+<SYNC Start=224200><P Class=KRCC>수고했네, 편히 쉬는 게 좋겠어
+<SYNC Start=227700><P Class=KRCC>- 저기, 올드 오스만<br>- 음?
+<SYNC Start=231300><P Class=KRCC>허무의 후예란 것을<br>알고 계시나요?
+<SYNC Start=234400><P Class=KRCC>&nbsp;
+<SYNC Start=236200><P Class=KRCC>기억이 애매해서 그렇게 부른 게<br>누군지는 모르겠지만
+<SYNC Start=241800><P Class=KRCC>확실히...
+<SYNC Start=243400><P Class=KRCC>허무란 잃어버린<br>전설의 마법 계통이지
+<SYNC Start=246900><P Class=KRCC>전설요? 그런 대단한 마법이라니!<br>그보다 평범한 마법조차...
+<SYNC Start=255000><P Class=KRCC>아니, 얘기할 필욘 없네
+<SYNC Start=257500><P Class=KRCC>&nbsp;
+<SYNC Start=258700><P Class=KRCC>간달브도 당연한 얘기란 건가?
+<SYNC Start=264000><P Class=KRCC>간달브?
+<SYNC Start=265500><P Class=KRCC>&nbsp;
+<SYNC Start=269400><P Class=KRCC>사이토가 전설의 사역마라고?
+<SYNC Start=272400><P Class=KRCC>&nbsp;
+<SYNC Start=273800><P Class=KRCC>그런 말도 안되는 게...
+<SYNC Start=275400><P Class=KRCC>&nbsp;
+<SYNC Start=276900><P Class=KRCC>나 왔어
+<SYNC Start=278200><P Class=KRCC>&nbsp;
+<SYNC Start=281200><P Class=KRCC>뭐야
+<SYNC Start=282800><P Class=KRCC>계속 더러워진 옷을<br>입고 있을 순 없으니까
+<SYNC Start=286400><P Class=KRCC>갈아입고 있었다구!
+<SYNC Start=288000><P Class=KRCC>&nbsp;
+<SYNC Start=289900><P Class=KRCC>빨래할 거 아직 더 있었잖아!
+<SYNC Start=292000><P Class=KRCC>나 참...
+<SYNC Start=292900><P Class=KRCC>불만만 늘어놓다간 밥 안 줄 거야!
+<SYNC Start=296300><P Class=KRCC>알았어
+<SYNC Start=297300><P Class=KRCC>&nbsp;
+<SYNC Start=298800><P Class=KRCC>왜 그렇게 평소처럼<br>돌아오는 거야
+<SYNC Start=301800><P Class=KRCC>&nbsp;
+<SYNC Start=307900><P Class=KRCC>키스까지 했으면서...
+<SYNC Start=309400><P Class=KRCC>&nbsp;
+<SYNC Start=310500><P Class=KRCC>저기말야
+<SYNC Start=312600><P Class=KRCC>왜?
+<SYNC Start=314100><P Class=KRCC>뭐랄까, 기운 내
+<SYNC Start=317200><P Class=KRCC>&nbsp;
+<SYNC Start=317900><P Class=KRCC>내가 얘기해 줄 건<br>이런 것밖엔 없지만서도...
+<SYNC Start=321900><P Class=KRCC>&nbsp;
+<SYNC Start=322800><P Class=KRCC>사이토
+<SYNC Start=323800><P Class=KRCC>&nbsp;
+<SYNC Start=332800><P Class=KRCC>고무줄이 끊어졌네
+<SYNC Start=334600><P Class=KRCC>예, 확실히 끊겼네요
+<SYNC Start=337400><P Class=KRCC>어떻게 된 거야?
+<SYNC Start=338700><P Class=KRCC>그런 말씀을 하셔도...
+<SYNC Start=341200><P Class=KRCC>&nbsp;
+<SYNC Start=344800><P Class=KRCC>아무렴 어떠랴
+<SYNC Start=345800><P Class=KRCC>&nbsp;
+<SYNC Start=346600><P Class=KRCC>설마 그 때...
+<SYNC Start=348300><P Class=KRCC>그 때?
+<SYNC Start=349900><P Class=KRCC>아니, 아냐!
+<SYNC Start=351400><P Class=KRCC>&nbsp;
+<SYNC Start=353700><P Class=KRCC>그러니까 일부러 그런 게<br>아니라고 말했잖아
+<SYNC Start=356800><P Class=KRCC>주인의 물건을 소중히<br>다루지 않는 사역마에게
+<SYNC Start=360000><P Class=KRCC>약간의 교육을<br>시켜주는 것 뿐이야
+<SYNC Start=362100><P Class=KRCC>팬티 한 장에 교육받아야 쓰겄어?
+<SYNC Start=365700><P Class=KRCC>나도 하고 싶어서<br>하는 일도 아니라구
+<SYNC Start=367800><P Class=KRCC>그렇겠지? 밥을 먹고 싶어서<br>어쩔 수 없이 사역마를 하는 거겠지?
+<SYNC Start=372600><P Class=KRCC>그래, 잘 알고 있네!
+<SYNC Start=374600><P Class=KRCC>&nbsp;
+<SYNC Start=375900><P Class=KRCC>그렇게 싫으면 당장 나가라구!
+<SYNC Start=378100><P Class=KRCC>아, 그러셔?
+<SYNC Start=380300><P Class=KRCC>사역마는 명을 받자옵니다, 주인님
+<SYNC Start=384800><P Class=KRCC>&nbsp;
+<SYNC Start=394000><P Class=KRCC>젠장, 누군 열나게<br>신경써주고 있었구만
+<SYNC Start=396800><P Class=KRCC>철없는 꼬맹이 같으니
+<SYNC Start=398200><P Class=KRCC>&nbsp;
+<SYNC Start=402100><P Class=KRCC>왜 그런 짓을 한 거지?
+<SYNC Start=404100><P Class=KRCC>&nbsp;
+<SYNC Start=405000><P Class=KRCC>그런 거라뇨?
+<SYNC Start=406400><P Class=KRCC>&nbsp;
+<SYNC Start=407800><P Class=KRCC>시에스타
+<SYNC Start=409300><P Class=KRCC>어라? 그 옷은...
+<SYNC Start=411100><P Class=KRCC>&nbsp;
+<SYNC Start=413000><P Class=KRCC>휴가를 받아서<br>집에 돌아가려구요
+<SYNC Start=416200><P Class=KRCC>&nbsp;
+<SYNC Start=416800><P Class=KRCC>- 귀향하는구나<br>- 아주 작은 마을이지만요
+<SYNC Start=420300><P Class=KRCC>돌아갈 곳이 있다는 건 좋은 거지
+<SYNC Start=423700><P Class=KRCC>그러고보니 전에 할아버지가<br>다른 세계에서 왔다고 했지?
+<SYNC Start=427200><P Class=KRCC>예, 증조할아버지요
+<SYNC Start=429600><P Class=KRCC>그 얘기 자세히 들려줄 수 있어?
+<SYNC Start=431800><P Class=KRCC>&nbsp;
+<SYNC Start=432700><P Class=KRCC>나라를 위해 결사의 여행을 떠났거늘<br>몽모랑시는 바람피러 갔다고 생각하고 있어
+<SYNC Start=439700><P Class=KRCC>그건 평소 네 행실이 잘못된 거잖아
+<SYNC Start=441800><P Class=KRCC>그러니 네가 직접...
+<SYNC Start=444200><P Class=KRCC>&nbsp;
+<SYNC Start=447400><P Class=KRCC>뭐야, 사이토는 또 저런 애랑<br>바람피우는 거야?
+<SYNC Start=450400><P Class=KRCC>&nbsp;
+<SYNC Start=451400><P Class=KRCC>- 키르케! 내 부탁을...<br>- 조용해
+<SYNC Start=453900><P Class=KRCC>두 마리의 용이라고?
+<SYNC Start=455900><P Class=KRCC>&nbsp;
+<SYNC Start=457600><P Class=KRCC>예, 한 마리는 일식중에 사라졌고
+<SYNC Start=461000><P Class=KRCC>남은 한 마리에 타고 있었던 게<br>증조할아버지라고 들었어요
+<SYNC Start=465500><P Class=KRCC>한 마리는 그 자리에서 사라지고
+<SYNC Start=467900><P Class=KRCC>남은 한 마리는<br>어딘가에 낙하했다고 하지
+<SYNC Start=471100><P Class=KRCC>지, 진짜야?
+<SYNC Start=473000><P Class=KRCC>그런데, 그 용이란 건?
+<SYNC Start=474900><P Class=KRCC>지금도 가보로써 어딘가에<br>보관해둔 건 같아요
+<SYNC Start=478600><P Class=KRCC>저는 본 적이 없지만서도...
+<SYNC Start=481000><P Class=KRCC>- 시에스타!<br>- 예?
+<SYNC Start=482600><P Class=KRCC>나도 너네 마을로<br>데려가 줄 수 있어?
+<SYNC Start=484800><P Class=KRCC>&nbsp;
+<SYNC Start=486900><P Class=KRCC>지금 얘기 들었어?
+<SYNC Start=489400><P Class=KRCC>보물이라든가...
+<SYNC Start=491000><P Class=KRCC>타비사, 어떻게 생각해?
+<SYNC Start=492900><P Class=KRCC>흥미없어
+<SYNC Start=494300><P Class=KRCC>난 엄청 흥미있어!
+<SYNC Start=496300><P Class=KRCC>&nbsp;
+<SYNC Start=506400><P Class=KRCC>그 때는 하기 너무나 싫어서<br>어쩔 도리가 없었는데...
+<SYNC Start=509400><P Class=KRCC>&nbsp;
+<SYNC Start=511900><P Class=KRCC>정말! 어째서 이렇게<br>신경쓰이는 거야!
+<SYNC Start=514900><P Class=KRCC>&nbsp;
+<SYNC Start=519500><P Class=KRCC>내가 말이 지나쳤어<br>미안해
+<SYNC Start=522400><P Class=KRCC>&nbsp;
+<SYNC Start=524500><P Class=KRCC>이건 주인으로서<br>위엄이 없어보이겠지?
+<SYNC Start=527700><P Class=KRCC>용서해줄게, 고맙게 생각해
+<SYNC Start=529900><P Class=KRCC>&nbsp;
+<SYNC Start=531800><P Class=KRCC>좀 심한가?
+<SYNC Start=533000><P Class=KRCC>&nbsp;
+<SYNC Start=540600><P Class=KRCC>어딜 간 거야?
+<SYNC Start=542100><P Class=KRCC>&nbsp;
+<SYNC Start=544200><P Class=KRCC>모처럼 사과하려는데...
+<SYNC Start=546700><P Class=KRCC>&nbsp;
+<SYNC Start=558100><P Class=KRCC>시에스타 말입니까?
+<SYNC Start=559700><P Class=KRCC>귀향한다고 들었습니다만?
+<SYNC Start=563100><P Class=KRCC>- 귀향?<br>- 예
+<SYNC Start=565000><P Class=KRCC>타르브 마을이라고 하던데요
+<SYNC Start=567200><P Class=KRCC>시에스타가 무슨 일이라도<br>저질렀습니까?
+<SYNC Start=568800><P Class=KRCC>됐어, 고마워
+<SYNC Start=570300><P Class=KRCC>&nbsp;
+<SYNC Start=571100><P Class=KRCC>시에스타네 집이라고?<br>그 발정난 똥개가!!
+<SYNC Start=574500><P Class=KRCC>나한테 키스까지 했으면서!<br>키스까지 했으면서!
+<SYNC Start=579500><P Class=KRCC>&nbsp;
+<SYNC Start=580300><P Class=KRCC>키스까지...했으면서...
+<SYNC Start=582700><P Class=KRCC>&nbsp;
+<SYNC Start=584600><P Class=KRCC>타르브 마을? 어디선가...
+<SYNC Start=587400><P Class=KRCC>&nbsp;
+<SYNC Start=590700><P Class=KRCC>이제 조금 남았어요
+<SYNC Start=592000><P Class=KRCC>좋은 곳이네
+<SYNC Start=593900><P Class=KRCC>- 저기, 괜찮으세요?<br>- 뭐가?
+<SYNC Start=597900><P Class=KRCC>Miss.발리에르께 말도 없이...
+<SYNC Start=599800><P Class=KRCC>됐어
+<SYNC Start=600800><P Class=KRCC>&nbsp;
+<SYNC Start=605000><P Class=KRCC>사이토 씨?
+<SYNC Start=606500><P Class=KRCC>&nbsp;
+<SYNC Start=612000><P Class=KRCC><font color=dodgerblue>http://cyworld.nate.com/fsg87</font><br><font color=salmon>http://fsg87.egloos.com</font>
+<SYNC Start=617000><P Class=KRCC>&nbsp;
+<SYNC Start=620800><P Class=KRCC>난 여기서 기다리고 있을게
+<SYNC Start=622700><P Class=KRCC>여기서요? 저희 집에 들러주세요<br>가족들에게도 소개해드리고 싶구요
+<SYNC Start=629600><P Class=KRCC>소개? 그럼, 오해할지도 모를텐데...
+<SYNC Start=633600><P Class=KRCC>그런가요?
+<SYNC Start=635200><P Class=KRCC>아니, 그렇게 실망하면...
+<SYNC Start=638100><P Class=KRCC>죄송해요, 이건 사이토 씨에게<br>있어선 중요한 거겠죠?
+<SYNC Start=642700><P Class=KRCC>그럼 보물이 있는 곳을 알아내서<br>금방 돌아올게요
+<SYNC Start=646500><P Class=KRCC>- 고마워, 무리한 부탁해서 미안해<br>- 아니에요
+<SYNC Start=651500><P Class=KRCC>&nbsp;
+<SYNC Start=653200><P Class=KRCC>착한 애로구만
+<SYNC Start=654700><P Class=KRCC>그래, 그 기품만 높은<br>철없는 꼬맹이보단 훨씬...
+<SYNC Start=659700><P Class=KRCC>그래도 역시 마음은 그쪽이지?
+<SYNC Start=662000><P Class=KRCC>그럴리가 없잖아<br>모르면 잠자코 있어
+<SYNC Start=664400><P Class=KRCC>&nbsp;
+<SYNC Start=665200><P Class=KRCC>곧 있으면 타르브 마을입니다!
+<SYNC Start=667700><P Class=KRCC>&nbsp;
+<SYNC Start=672300><P Class=KRCC>곳간에 숨겨둔 걸<br>몰래 가져왔어요
+<SYNC Start=676400><P Class=KRCC>여기에 용이 있는 거야?
+<SYNC Start=678000><P Class=KRCC>정확히는 용의 날개옷이라고<br>한다고 하더라구요
+<SYNC Start=681400><P Class=KRCC>- 날개옷?<br>- 네
+<SYNC Start=683000><P Class=KRCC>그걸 사용해서 증조할아버지는<br>다른 세계에서 날아오셨데요
+<SYNC Start=686900><P Class=KRCC>사용해서...
+<SYNC Start=688200><P Class=KRCC>&nbsp;
+<SYNC Start=690000><P Class=KRCC>다 들었어
+<SYNC Start=691500><P Class=KRCC>&nbsp;
+<SYNC Start=692700><P Class=KRCC>키르케?
+<SYNC Start=693700><P Class=KRCC>&nbsp;
+<SYNC Start=701000><P Class=KRCC>두더지?
+<SYNC Start=702200><P Class=KRCC>그렇다는 건...
+<SYNC Start=703700><P Class=KRCC>&nbsp;
+<SYNC Start=705400><P Class=KRCC>너흰 왜...그보다 뭐하러...
+<SYNC Start=708700><P Class=KRCC>그야 당연하지
+<SYNC Start=711000><P Class=KRCC>보물찾기지
+<SYNC Start=712600><P Class=KRCC>뭐야?
+<SYNC Start=713600><P Class=KRCC>&nbsp;
+<SYNC Start=717600><P Class=KRCC>이 동굴이지?
+<SYNC Start=719100><P Class=KRCC>두근두근거려
+<SYNC Start=720900><P Class=KRCC>난 놀러온 게 아니라구
+<SYNC Start=723700><P Class=KRCC>나도 마찬가지야
+<SYNC Start=725300><P Class=KRCC>비보를 발견해서 몽모랑시에게<br>다시금 나를 어필하는 목적이 있지
+<SYNC Start=730300><P Class=KRCC>시시하기도 해라
+<SYNC Start=733000><P Class=KRCC>&nbsp;
+<SYNC Start=733700><P Class=KRCC>좀이 쑤시는군, 알비온에서도<br>별다른 활약도 없었고
+<SYNC Start=737700><P Class=KRCC>&nbsp;
+<SYNC Start=738800><P Class=KRCC>알비온...
+<SYNC Start=739800><P Class=KRCC>그러고보니 그 후에<br>어떻게 됐을까?
+<SYNC Start=742300><P Class=KRCC>크롬웰 님! 크롬웰 님!
+<SYNC Start=745900><P Class=KRCC>드디어 이 알비온의 사물화했던<br>튜더왕가는 무너졌다
+<SYNC Start=750600><P Class=KRCC>새로운 알비온에 영광이 있으리!
+<SYNC Start=753200><P Class=KRCC>알비온 만세! 알비온 만세!
+<SYNC Start=757700><P Class=KRCC>&nbsp;
+<SYNC Start=760700><P Class=KRCC>어디까지 이어져 있는 거야?
+<SYNC Start=762900><P Class=KRCC>저도 잘 몰라요<br>마을 사람들도 여긴 오지 않아요
+<SYNC Start=766600><P Class=KRCC>오래된 악귀가<br>사는 곳이라고도 해서...
+<SYNC Start=769300><P Class=KRCC>&nbsp;
+<SYNC Start=770200><P Class=KRCC>그런 건 빨리 말하라구
+<SYNC Start=773300><P Class=KRCC>누가 와 있어
+<SYNC Start=775200><P Class=KRCC>&nbsp;
+<SYNC Start=776000><P Class=KRCC>- 누구라니?<br>- 우리 이외에...
+<SYNC Start=778600><P Class=KRCC>&nbsp;
+<SYNC Start=780400><P Class=KRCC>이거 발소리지?
+<SYNC Start=782200><P Class=KRCC>&nbsp;
+<SYNC Start=783200><P Class=KRCC>뒤쪽에서...
+<SYNC Start=784800><P Class=KRCC>그런 것 같네
+<SYNC Start=785800><P Class=KRCC>&nbsp;
+<SYNC Start=787300><P Class=KRCC>누구냐? 뭐하는 놈이냐?
+<SYNC Start=789300><P Class=KRCC>- 시에스타, 내 뒤로 와<br>- 네
+<SYNC Start=791600><P Class=KRCC>&nbsp;
+<SYNC Start=796400><P Class=KRCC>이건 경고입니다
+<SYNC Start=798300><P Class=KRCC>목숨이 아깝거든 물러가십시오!
+<SYNC Start=801300><P Class=KRCC>제길
+<SYNC Start=802200><P Class=KRCC>베르단테
+<SYNC Start=803200><P Class=KRCC>&nbsp;
+<SYNC Start=804000><P Class=KRCC>잠깐, 이 목소리는...
+<SYNC Start=805600><P Class=KRCC>귀중한 역사적 유물을<br>노리는 도굴꾼놈들!
+<SYNC Start=809400><P Class=KRCC>콜베르 선생님!
+<SYNC Start=811400><P Class=KRCC>너, 너희들?!
+<SYNC Start=812900><P Class=KRCC>&nbsp;
+<SYNC Start=816300><P Class=KRCC>루이즈?
+<SYNC Start=817300><P Class=KRCC>&nbsp;
+<SYNC Start=819100><P Class=KRCC>용의 유적이 여기에 있다는<br>정보를 얻어서 발굴을 하러 온 건데
+<SYNC Start=824000><P Class=KRCC>설마 너희가...
+<SYNC Start=825900><P Class=KRCC>- 목적은 같다는 건가?<br>- 목적?
+<SYNC Start=828900><P Class=KRCC>&nbsp;
+<SYNC Start=830900><P Class=KRCC>이것은?
+<SYNC Start=831900><P Class=KRCC>그럼 네가 이세계인의<br>피를 이은 사람인 거로군!
+<SYNC Start=835200><P Class=KRCC>&nbsp;
+<SYNC Start=836000><P Class=KRCC>귀중한 연구자료가<br>이렇게 가까이 있었을 줄이야!
+<SYNC Start=840100><P Class=KRCC>그냥 전설일 뿐이고<br>그 지도가 진짜일지 아닐지도 몰라요
+<SYNC Start=844100><P Class=KRCC>선생님 연구의 조수로<br>와있는 것 뿐이야
+<SYNC Start=846600><P Class=KRCC>딱히 따라온 건 아니라구
+<SYNC Start=849200><P Class=KRCC>안 물어봤어
+<SYNC Start=850900><P Class=KRCC>이상한 오해하면 안되니까<br>먼저 말해두는 것 뿐이야
+<SYNC Start=853800><P Class=KRCC>왜 내가 오해를 하는 건데?
+<SYNC Start=856300><P Class=KRCC>&nbsp;
+<SYNC Start=859600><P Class=KRCC>- 사랑싸움도 좋지만...<br>- 뭐가 사랑싸움이야!
+<SYNC Start=862400><P Class=KRCC>두고갈지도 모를텐데?
+<SYNC Start=863900><P Class=KRCC>&nbsp;
+<SYNC Start=864900><P Class=KRCC>- 발밑은 조심하고<br>- 왠지 수업시간이 된 기분인데...
+<SYNC Start=867500><P Class=KRCC>- 보물찾기였는데<br>- 잡담은 엄금이다
+<SYNC Start=870500><P Class=KRCC>&nbsp;
+<SYNC Start=879400><P Class=KRCC>여기는?
+<SYNC Start=880400><P Class=KRCC>&nbsp;
+<SYNC Start=882800><P Class=KRCC>굉장하다
+<SYNC Start=884100><P Class=KRCC>비보가 잠들어있기에<br>어울리는 장소로군
+<SYNC Start=886300><P Class=KRCC>그런데 보물은?
+<SYNC Start=888800><P Class=KRCC>&nbsp;
+<SYNC Start=889700><P Class=KRCC>지도에 의하면 이 근처인데...
+<SYNC Start=892000><P Class=KRCC>&nbsp;
+<SYNC Start=895800><P Class=KRCC>저건?
+<SYNC Start=896800><P Class=KRCC>&nbsp;
+<SYNC Start=906100><P Class=KRCC>이 정도의 열쇠라면<br>마법으로 해제할 수 있겠군
+<SYNC Start=909200><P Class=KRCC>&nbsp;
+<SYNC Start=914900><P Class=KRCC>타비사, 뭘 보는 거야?
+<SYNC Start=916400><P Class=KRCC>&nbsp;
+<SYNC Start=922200><P Class=KRCC>본 적 없는 문자네
+<SYNC Start=924700><P Class=KRCC>자, 열어봅시다!
+<SYNC Start=926400><P Class=KRCC>&nbsp;
+<SYNC Start=929000><P Class=KRCC>해군소위 사사키 타케오
+<SYNC Start=931700><P Class=KRCC>&nbsp;
+<SYNC Start=932300><P Class=KRCC>이계에서 잠들다...
+<SYNC Start=934700><P Class=KRCC>읽을 수 있어?
+<SYNC Start=936800><P Class=KRCC>일본어...
+<SYNC Start=939300><P Class=KRCC>내가 살던 나라의...말이야
+<SYNC Start=942300><P Class=KRCC>뭐라구?
+<SYNC Start=944000><P Class=KRCC>찾았다! 이거야!
+<SYNC Start=945500><P Class=KRCC>&nbsp;
+<SYNC Start=949400><P Class=KRCC>- 이건 뭐지?<br>- 이런 건 처음 봐
+<SYNC Start=952400><P Class=KRCC>&nbsp;
+<SYNC Start=953200><P Class=KRCC>이게 용의 날개옷?
+<SYNC Start=955200><P Class=KRCC>&nbsp;
+<SYNC Start=956600><P Class=KRCC>말도 안 돼...
+<SYNC Start=958400><P Class=KRCC>&nbsp;
+<SYNC Start=970800><P Class=KRCC>확실해, 틀림없어
+<SYNC Start=973700><P Class=KRCC>&nbsp;
+<SYNC Start=976700><P Class=KRCC>제로센(Zero Fighter)이야
+<SYNC Start=978300><P Class=KRCC>&nbsp;
+<SYNC Start=981500><P Class=KRCC>고철화 마법이<br>걸려있는 모양이군
+<SYNC Start=984800><P Class=KRCC>정말로 있었다니...
+<SYNC Start=986700><P Class=KRCC>난 시에스타를 처음 봤을 때<br>어렴풋이 그리운듯한 느낌이 들었어
+<SYNC Start=993500><P Class=KRCC>그래, 그 검은 머리와 눈색에는<br>일본인의 피가...
+<SYNC Start=997500><P Class=KRCC>&nbsp;
+<SYNC Start=998700><P Class=KRCC>일본인?
+<SYNC Start=1000300><P Class=KRCC>나와 시에스타의 증조할아버지는<br>같은 세계에서 온 거야
+<SYNC Start=1004300><P Class=KRCC>&nbsp;
+<SYNC Start=1005800><P Class=KRCC>사이토
+<SYNC Start=1006800><P Class=KRCC>&nbsp;
+<SYNC Start=1007900><P Class=KRCC>자네는 원래의 세계로<br>돌아갈 수 있을지도 모르겠어
+<SYNC Start=1011500><P Class=KRCC>&nbsp;
+<SYNC Start=1014000><P Class=KRCC>일식에 나타나<br>다른 하나는 일식에 사라졌다
+<SYNC Start=1019900><P Class=KRCC>다른 하나인 이것은<br>어째서 돌아갈 수 없었을까?
+<SYNC Start=1023500><P Class=KRCC>증조할아버지는 또 다른<br>날개옷이 사라져도 크게 하늘을 돌다가
+<SYNC Start=1029200><P Class=KRCC>결국 땅으로 내려왔다고 하셨어요
+<SYNC Start=1031400><P Class=KRCC>타이밍을 놓쳤다는 셈이지
+<SYNC Start=1034100><P Class=KRCC>타이밍?
+<SYNC Start=1035300><P Class=KRCC>&nbsp;
+<SYNC Start=1038700><P Class=KRCC>하늘을 나는 도중<br>일식이 끝나 돌아갈 수 없었다
+<SYNC Start=1042700><P Class=KRCC>&nbsp;
+<SYNC Start=1043700><P Class=KRCC>즉, 이 용의 날개옷으로<br>일식에 달려들면
+<SYNC Start=1048100><P Class=KRCC>다시 이세계로의 도약이<br>가능하진 않을까 하는 것이지
+<SYNC Start=1051300><P Class=KRCC>그럼 사이토 씨가 이걸 타고<br>일식에 뛰어들면
+<SYNC Start=1055700><P Class=KRCC>원래 있던 세계로?
+<SYNC Start=1057200><P Class=KRCC>뭐, 어디까지나 내 추측이지만<br>그 가능성은 적지 않겠지
+<SYNC Start=1062300><P Class=KRCC>&nbsp;
+<SYNC Start=1063200><P Class=KRCC>돌아갈 수 있을지도 모른다니...
+<SYNC Start=1065200><P Class=KRCC>&nbsp;
+<SYNC Start=1067300><P Class=KRCC>사이토가 없어져?
+<SYNC Start=1069800><P Class=KRCC>&nbsp;
+<SYNC Start=1075300><P Class=KRCC>그럼 내 조카인 알비온의<br>웰즈에게 보낸 편지라는 건...
+<SYNC Start=1081400><P Class=KRCC>틀림없습니다
+<SYNC Start=1083900><P Class=KRCC>마리앙느 대공
+<SYNC Start=1086300><P Class=KRCC>방금 전에 게르마니아에서<br>약혼을 파기하자는 연락을 받았다
+<SYNC Start=1092900><P Class=KRCC>제 경솔한 행동이<br>이러한 사태를 불러온 겁니다
+<SYNC Start=1098200><P Class=KRCC>제게 벌을 내려주시옵소서
+<SYNC Start=1101000><P Class=KRCC>너는 충분히 고통을<br>받았지 않느냐?
+<SYNC Start=1106200><P Class=KRCC>&nbsp;
+<SYNC Start=1108400><P Class=KRCC>사랑하는 사람의 죽음이라는...
+<SYNC Start=1110400><P Class=KRCC>&nbsp;
+<SYNC Start=1116000><P Class=KRCC>지난일은 어쩔 수 없는 거란다
+<SYNC Start=1119400><P Class=KRCC>모든 것이 운명이라<br>생각하고 받아들이렴
+<SYNC Start=1122400><P Class=KRCC>&nbsp;
+<SYNC Start=1123700><P Class=KRCC>어마마마
+<SYNC Start=1124700><P Class=KRCC>&nbsp;
+<SYNC Start=1131200><P Class=KRCC>공주 전하! 큰일이옵니다!
+<SYNC Start=1134800><P Class=KRCC>&nbsp;
+<SYNC Start=1138000><P Class=KRCC>설마 정말로 발견하게 될 줄이야
+<SYNC Start=1140800><P Class=KRCC>&nbsp;
+<SYNC Start=1141100><P Class=KRCC>이번엔 산에서 조난이라도<br>당할 줄 알았는데
+<SYNC Start=1145100><P Class=KRCC>날개옷의 운반과 수거의 인력을<br>보태주셔서 고맙습니다
+<SYNC Start=1149600><P Class=KRCC>이만한 물건일세
+<SYNC Start=1151400><P Class=KRCC>왕궁시설의 중요 연구자료료써<br>학교소유허가를 딸 수는 있겠지
+<SYNC Start=1157400><P Class=KRCC>&nbsp;
+<SYNC Start=1158500><P Class=KRCC>나머진 연료인가...
+<SYNC Start=1160000><P Class=KRCC>&nbsp;
+<SYNC Start=1162500><P Class=KRCC>그렇지
+<SYNC Start=1163700><P Class=KRCC>콜베르 선생님
+<SYNC Start=1165200><P Class=KRCC>&nbsp;
+<SYNC Start=1168900><P Class=KRCC>이걸 대량으로 복제하면<br>용의 날개옷은 움직일 수 있을 거예요
+<SYNC Start=1173000><P Class=KRCC>오, 그것은 역시<br>용의 피가 틀림 없었구나!
+<SYNC Start=1177100><P Class=KRCC>피가 아니라 가솔린이에요
+<SYNC Start=1179000><P Class=KRCC>가솔린?
+<SYNC Start=1180000><P Class=KRCC>&nbsp;
+<SYNC Start=1186900><P Class=KRCC>이게 방향타
+<SYNC Start=1188400><P Class=KRCC>&nbsp;
+<SYNC Start=1189100><P Class=KRCC>이게 피치레버
+<SYNC Start=1190600><P Class=KRCC>말도 안 돼! 진짜 알아내고 있어
+<SYNC Start=1193400><P Class=KRCC>그러니까 타보면<br>알 수 있다고 했잖냐
+<SYNC Start=1195900><P Class=KRCC>너는 무기나 병기를<br>자유롭게 다룰 수 있다구
+<SYNC Start=1199600><P Class=KRCC>- 이건 그런 거겠지?<br>- 그래
+<SYNC Start=1202800><P Class=KRCC>틀림없는 병기지
+<SYNC Start=1204300><P Class=KRCC>&nbsp;
+<SYNC Start=1205100><P Class=KRCC>전쟁을 위해 만들어진...
+<SYNC Start=1206600><P Class=KRCC>&nbsp;
+<SYNC Start=1221200><P Class=KRCC>사이토가...
+<SYNC Start=1223000><P Class=KRCC>사이토가 없어져...
+<SYNC Start=1224700><P Class=KRCC>&nbsp;
+<SYNC Start=1235700><P Class=KRCC>루이즈!
+<SYNC Start=1237300><P Class=KRCC>큰일났어!
+<SYNC Start=1238900><P Class=KRCC>시끄러
+<SYNC Start=1240500><P Class=KRCC>지금 마을에서 듣고 왔는데
+<SYNC Start=1242000><P Class=KRCC>뭘, 듣고 왔는데? 또 예쁜 여자애<br>소문이라도 들은 거야?
+<SYNC Start=1246200><P Class=KRCC>- 알비온이...<br>- 알비온?
+<SYNC Start=1248400><P Class=KRCC>알비온이 신국가<br>레콘키스타로 이름을 바꾸고
+<SYNC Start=1253000><P Class=KRCC>이 트리스테인에 선전포고를 했어!
+<SYNC Start=1255200><P Class=KRCC>말도 안 돼!
+<SYNC Start=1257400><P Class=KRCC>&nbsp;
+<SYNC Start=1259600><P Class=KRCC>그런데 일식은 언제 하는 거래?
+<SYNC Start=1262600><P Class=KRCC>&nbsp;
+<SYNC Start=1265500><P Class=KRCC>알비온은 귀족 평민을 가리지 않고<br>모두 각하를 받들고 있습니다
+<SYNC Start=1271500><P Class=KRCC>&nbsp;
+<SYNC Start=1273200><P Class=KRCC>무서운 건 이 반지에 새겨진 마력이지
+<SYNC Start=1276900><P Class=KRCC>고생해서 물의 정령에게서<br>빼앗은 보람은 있다는 얘기네
+<SYNC Start=1281600><P Class=KRCC>대륙 전토를 내 것으로<br>만들기 위함의 발판에 불과하지
+<SYNC Start=1288000><P Class=KRCC>다음은 대륙 중앙에 위치한<br>트리스테인을 함락시키는 것이다
+<SYNC Start=1293000><P Class=KRCC>준비는 끝났소
+<SYNC Start=1295300><P Class=KRCC>이제 트리스테인에<br>도망칠 곳은 없지
+<SYNC Start=1298400><P Class=KRCC>알비온이 자랑하는 용기사단을<br>투하하면 티끌도 안남을테지
+<SYNC Start=1303500><P Class=KRCC>&nbsp;
+<SYNC Start=1304600><P Class=KRCC>그래서, 이 알비온 대륙이<br>가장 접근할 때는?
+<SYNC Start=1308500><P Class=KRCC>3일 후
+<SYNC Start=1309700><P Class=KRCC>&nbsp;
+<SYNC Start=1310900><P Class=KRCC>일식의 날이죠
+<SYNC Start=1312400><P Class=KRCC>&nbsp;
+<SYNC Start=1323100><P Class=KRCC><font color=#7fe168>リアルな魔法に</font><br><font color=#bef0b3>진짜로 마법에</font>
+<SYNC Start=1328700><P Class=KRCC><font color=#7fe168>掛ったみたいに</font><br><font color=#bef0b3>걸린 것 같이</font>
+<SYNC Start=1334000><P Class=KRCC><font color=#7fe168>この胸にやきついた</font><br><font color=#bef0b3>이 가슴에 강하게 새겨진</font>
+<SYNC Start=1339200><P Class=KRCC><font color=#7fe168>まぶしい笑顔</font><br><font color=#bef0b3>눈부신 너의 미소</font>
+<SYNC Start=1344400><P Class=KRCC><font color=#7fe168>だけど合う旅に</font><br><font color=#bef0b3>그치만 만날 때 마다</font>
+<SYNC Start=1349000><P Class=KRCC><font color=#7fe168>ツンツン、冷たくしちゃうよ</font><br><font color=#bef0b3>툴툴거리며 차갑게 대하고 말아</font>
+<SYNC Start=1354500><P Class=KRCC><font color=#7fe168>ナゼ、誰より氣になるのに</font><br><font color=#bef0b3>왜 누구보다 마음에 들면서도</font>
+<SYNC Start=1359800><P Class=KRCC><font color=#7fe168>意地惡をしちゃうんだろう</font><br><font color=#bef0b3>심술을 부리고 마는 걸까?</font>
+<SYNC Start=1364800><P Class=KRCC>&nbsp;
+<SYNC Start=1368000><P Class=KRCC><font color=#7fe168>本當の氣持ち</font><br><font color=#bef0b3>내 진짜 마음은</font>
+<SYNC Start=1373100><P Class=KRCC><font color=#7fe168>切なさの欠片が</font><br><font color=#bef0b3>애절함의 조각이</font>
+<SYNC Start=1378700><P Class=KRCC><font color=#7fe168>この心の一番おく</font><br><font color=#bef0b3>이 마음속 가장 깊은 곳에서</font>
+<SYNC Start=1383900><P Class=KRCC><font color=#7fe168>君をよんでいるよ</font><br><font color=#bef0b3>너를 부르고 있어</font>
+<SYNC Start=1389300><P Class=KRCC><font color=#7fe168>ゼロから始まる日を</font><br><font color=#bef0b3>처음부터 다시 시작할 날을</font>
+<SYNC Start=1395300><P Class=KRCC>&nbsp;
+<SYNC Start=1406200><P Class=KRCC>싸우게 되면 가슴이 아리게<br>되던 게 언제부터지?
+<SYNC Start=1409600><P Class=KRCC>다른 애 옆에 있는 네가<br>신경쓰이게 되던 게 언제부터지?
+<SYNC Start=1414000><P Class=KRCC>잘 가, 사이토
+<SYNC Start=1416200><P Class=KRCC>다음 최종화!<br>허무의 루이즈
+<SYNC Start=1420800><P Class=KRCC>&nbsp;
+</BODY>
+</SAMI>
