@@ -13,11 +13,7 @@
 #define CMD_LEN PATH_LEN * 2 + 20
 #define TIME_LEN 40
 
-#define CONVERT_V1 "./convert_v1 \""				//conver_v1 명령어
-#define CONVERT_V2 "/usr/local/bin/smi2srt -n \""	//convert_v2 명령어
-#define GREP "grep -i \"<body>\" \""				//convert_v1과 convert_v2 판별 위한 grep <body> 명령어
-#define GREP_ERROR "grep -i \"Error\" \""			//convert_v1 수행 후 error 판별 위한 grep Error 명령어
-#define GREPFILE "grep.tmp"		//grep의 결과를 저장하는 임시 파일의 경로
+#define CONVERT "/usr/local/bin/smi2srt -n \""	//CONVERT 명령어
 #define TMPFILE "tmp.tmp"		//출력 결과를 임시 저장하는 임시 파일의 경로
 #define LOGFILE "log.txt"		//로그 저장하는 파일의 경로			
 #define ERRFILE "error.txt"		//error 로그 저장하는 파일의 경로
@@ -31,8 +27,7 @@ typedef enum {false, true} bool;
 bool backup = false;			//-b 옵션 여부 저장
 bool noTimeSave = false;		//-nts 옵션 여부 저장
 
-char cmd_v1[CMD_LEN] = CONVERT_V1;			//convert_v1 명령어 저장
-char cmd_v2[CMD_LEN] = CONVERT_V2;			//convert_v2 명령어 저장
+char cmd_v2[CMD_LEN] = CONVERT;			//CONVERT 명령어 저장
 char grepCmd[CMD_LEN] = GREP;				//grep <body> 명령어 저장
 char grepErrorCmd[CMD_LEN] = GREP_ERROR;	//grep Error 명령어 저장
 
@@ -66,70 +61,36 @@ void redirection(char *cmd, const char *tmpFile)
 //smi를 srt로 변환하는 함수
 void smi2srt(char path[PATH_LEN])
 {
-	strcpy(grepCmd + strlen(GREP), path);	//grep <body> 수행 위해 명령어 완성
-	strcat(grepCmd, "\"");
+	strcpy(cmd_v2 + strlen(CONVERT), path);	//CONVERT 명령어 완성
+	strcat(cmd_v2, "\"");
 
-	redirection(grepCmd, GREPFILE);			//grep <body> 수행 후 출력 결과 GREPFILE에 저장
+	redirection(cmd_v2, TMPFILE);				//CONVERT 수행 후 출력 결과 TMPFILE에 저장
 
-	struct stat statbuf;
-	if(stat(GREPFILE, &statbuf) < 0){		//GREPFILE stat 획득
-		fprintf(stderr, "stat error for %s\n", GREPFILE);
+	if(stat(TMPFILE, &statbuf) < 0){			//TMPFILE stat 획득
+		fprintf(stderr, "stat error for %s\n", TMPFILE);
 		exit(1);
 	}
+	if(statbuf.st_size > 0){					//TMPFILE의 size 0 이상인 경우 (CONVERT 정상 수행된 경우)
+		fprintf(stderr, "%s are converted.\n", path + strlen(nowRootDir));	//log.txt에 추가
 
-	if(statbuf.st_size > 0){	//GREPFILE의 size가 0 이상일 경우 (<body>가 있을 경우)	=> convert_v1 수행
-		strcpy(cmd_v1 + strlen(CONVERT_V1), path);	//convert_v1 명령어 완성
-		strcat(cmd_v1, "\" \"");
-		strncat(cmd_v1, path, strlen(path)-3);
-		strcat(cmd_v1, "srt\"");
-		strcat(cmd_v1, " -d1");
+		/*
+		char src[PATH_LEN];						//ko.srt 파일 경로
+		strcpy(src, path);
+		src[strlen(path)-3] = '\0';
+		strcat(src, "ko.srt");
 
-		redirection(cmd_v1, TMPFILE);				//convert_v1 수행 후 출력 결과 TMPFILE에 저장
+		char dst[PATH_LEN];						//.srt 파일 경로
+		strcpy(dst, path);
+		dst[strlen(path)-3] = '\0';
+		strcat(dst, "srt");
 
-		strcpy(grepErrorCmd + strlen(GREP_ERROR), TMPFILE);	//TMPFILE에 대한 grep Error 명령어 완성
-		strcat(grepErrorCmd, "\"");
-
-		redirection(grepErrorCmd, GREPFILE);		//grep Error 수행 후 출력 결과 GREPFILE에 저장
-
-		if(stat(GREPFILE, &statbuf) < 0){			//GREPFILE stat 획득
-			fprintf(stderr, "stat error for %s\n", GREPFILE);
-			exit(1);
-		}
-		if(statbuf.st_size > 0)						//GREPFILE size가 0 이상일 경우 (convert_v1 수행 후 출력 결과에 Error 있을 경우)
-			fprintf(errorFp, "%s\n", path);			//error.txt에 추가
-		else										//GREPFILE size가 0일 경우 (covnert_v1 정상 수행된 경우)
-			fprintf(stderr, "%s are converted with convert_v1.\n", path + strlen(nowRootDir));	//log.txt에 추가
+		if(rename(src, dst)<0)					//ko.srt rename
+			fprintf(stderr, "rename error for %s\n", src);
+		*/
 	}
+	else										//TMPFILE의 size 0인 경우 (CONVERT error 발생한 경우)
+		fprintf(errorFp, "%s\n", path);			//error.txt에 추가
 
-	else{						//GREPFILE의 size가 0일 경우 (<body>가 없을 경우)	=> convert_v2 수행
-		strcpy(cmd_v2 + strlen(CONVERT_V2), path);	//convert_v2 명령어 완성
-		strcat(cmd_v2, "\"");
-
-		redirection(cmd_v2, TMPFILE);				//convert_v2 수행 후 출력 결과 TMPFILE에 저장
-
-		if(stat(TMPFILE, &statbuf) < 0){			//TMPFILE stat 획득
-			fprintf(stderr, "stat error for %s\n", TMPFILE);
-			exit(1);
-		}
-		if(statbuf.st_size > 0){					//TMPFILE의 size 0 이상인 경우 (convert_v2 정상 수행된 경우)
-			fprintf(stderr, "%s are converted with convert_v2.\n", path + strlen(nowRootDir));	//log.txt에 추가
-
-			char src[PATH_LEN];						//ko.srt 파일 경로
-			strcpy(src, path);
-			src[strlen(path)-3] = '\0';
-			strcat(src, "ko.srt");
-
-			char dst[PATH_LEN];						//.srt 파일 경로
-			strcpy(dst, path);
-			dst[strlen(path)-3] = '\0';
-			strcat(dst, "srt");
-
-			if(rename(src, dst)<0)					//ko.srt rename
-				fprintf(stderr, "rename error for %s\n", src);
-		}
-		else										//TMPFILE의 size 0인 경우 (convert_v2 error 발생한 경우)
-			fprintf(errorFp, "%s\n", path);			//error.txt에 추가
-	}
 	return;
 }
 
