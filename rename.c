@@ -52,8 +52,9 @@ bool rename_srt(char src[PATH_LEN])
 		strcpy(dst, src);
 		if(!strcmp(str, ".ja.srt")){
 			str = dst + strlen(src) - strlen(".ja.srt");
-			str[0] = 'k';
-			str[1] = 'o';
+			str[0] = '.';
+			str[1] = 'k';
+			str[2] = 'o';
 		}
 		else{
 			str = dst + strlen(src) - strlen(".srt");
