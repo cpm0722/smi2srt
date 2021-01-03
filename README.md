@@ -69,7 +69,7 @@ from Hansu Kim (cpm0722@kakao.com)
         
         [참고](http://blog.naver.com/PostView.nhn?blogId=takakobj&logNo=110149113938)
 
-1. smi2srt(convert_v2) 설치
+1. smi2srt 설치
 
     ```bash
     sudo npm install smi2srt -g
@@ -88,20 +88,10 @@ from Hansu Kim (cpm0722@kakao.com)
     1. 디렉터리인 경우 재귀 호출
     1. smi 파일인 경우
         1.  변환 수행 (smi2srt)
-            - grep <body> 수행
-                1. grep <body>의 결과가 있는 경우
-                    1. convert_v1 실행
-                    1. 실행 후 출력 결과에서 grep <Error> 수행
-                        1. grep <Error>의 결과가 없는 경우
-                            - log.txt에 성공 log 추가
-                        1. grep <Error>의 결과가 있는 경우
-                            - error.txt에 에러 log 추가
-                1. grep <body>의 결과가 없는 경우
-                    - convert_v2 실행
-                        1. 실행 후 출력 결과가 있는 경우
-                            - log.txt에 성공 log 추가
-                        1. 실행 후 출력 결과가 없는 경우
-                            - error.txt에 에러 log 추가
+            1. 실행 후 출력 결과가 있는 경우
+                - log.txt에 성공 log 추가
+            1. 실행 후 출력 결과가 없는 경우
+                - error.txt에 에러 log 추가
         1. -b 옵션 판단
             - -b 옵션인 경우
                 1. 백업 경로 생성
@@ -177,8 +167,6 @@ from Hansu Kim (cpm0722@kakao.com)
         ```
 ## 라이센스
     
- cpm0722
-
-George Shuklin
+cpm0722
 
 axfree [axfree/smi2srt](https://github.com/axfree/smi2srt)
