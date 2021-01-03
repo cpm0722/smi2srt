@@ -8,6 +8,7 @@ from Hansu Kim (cpm0722@kakao.com)
 - 특정 디렉터리를 재귀적으로 탐색(하위 폴더 전부)하여 smi 파일을 찾아 srt 파일로 변경
 - -b 옵션을 사용해 smi 파일들을 백업 가능
 - -nts 옵션을 사용해 프로그램 실행 시각 갱신하지 않음
+- -pwd 옵션을 사용해 절대 경로 프로그램 실행될 작업 디렉터리의 절대 경로 지정 가능
 - 주기적 실행할 때 연산량 감소 위해 폴더 수정 시각과 이전 실행 시각 비교해 이후 갱신되었는지 판단해 실행
 - 실행 내역에 대한 로그 파일 log.txt 생성
 - 에러 발생 내역에 대한 로그 파일 error.txt 생성
@@ -77,7 +78,12 @@ from Hansu Kim (cpm0722@kakao.com)
 ## 구현
 
 1. 이전 실행 내역 있는지 판단
-1. -b 옵션 여부 판단
+1. 옵션 여부 판단
+    1. -b 옵션
+    1. -nts 옵션
+    1. -pwd 옵션
+        - pwd true인 경우
+            - 다음 인자로 넘겨받은 절대 경로로 chdir
 1. 인자로 받은 경로들에 대해 재귀 탐색 (search_directory)
     1. 디렉터리인 경우 재귀 호출
     1. smi 파일인 경우
@@ -99,8 +105,8 @@ from Hansu Kim (cpm0722@kakao.com)
         1. -b 옵션 판단
             - -b 옵션인 경우
                 1. 백업 경로 생성
-                2. 백업 경로의 부모 디렉터리에 대해 재귀적으로 생성 (mkdir_recursive)
-                3. 백업 경로로 smi 파일 이동
+                1. 백업 경로의 부모 디렉터리에 대해 재귀적으로 생성 (mkdir_recursive)
+                1. 백업 경로로 smi 파일 이동
     1. 인자로 받은 경로들에 대해 재귀 탐색 (search_directory)
     1. 디렉터리인 경우 재귀 호출
     1. smi 파일인 경우
@@ -142,17 +148,20 @@ from Hansu Kim (cpm0722@kakao.com)
     - 예제
 
         ```bash
-        ./smi2srt -nts -b [volume1 백업 디렉터리 경로] [volume1 경로1] [volume1 경
+        #start.sh
+        [smi2srt 절대 경로] -nts -pwd [smi2srt 위치한 디렉터리 절대 경로] -b [volume1 백업 디렉터리 경로] [volume1 경로1] [volume1 경
         로2] ... [volume1 경로n]
-        ./smi2srt -nts -b [volume2 백업 디렉터리 경로] [volume2 경로1] [volume2 경
+        [smi2srt 절대 경로] -nts -pwd [smi2srt 위치한 디렉터리 절대 경로] -b [volume2 백업 디렉터리 경로] [volume2 경로1] [volume2 경
         로2] ... [volume2 경로n]
         ...
-        ./smi2srt -b [volume N 백업 디렉터리 경로] [volume N 경로1] [volume N 경
+        [smi2srt 절대 경로] -pwd [smi2srt 위치한 디렉터리 절대 경로] -b [volume N 백업 디렉터리 경로] [volume N 경로1] [volume N 경
         로2] ... [volume N 경로n]
         ```
 
-        - volume마다 별도로 실행해야 함
+        - smi2srt 실행 파일의 절대 경로를 사용해야 함
+        - volume마다 별도로 실행해야 함 (volume 간 파일 이동 불가능)
         - 마지막 실행을 제외하고는 모두 -nts 옵션을 붙여 실행시간을 갱신하지 않음
+        - Synology 작업 스케줄에서는 실제 스크립트 파일 위치한 절대 경로에서 실행하는 것이 아니기 때문에 -pwd 옵션으로 스크립트 실행 파일에 대한 절대 경로를 필수적으로 넘겨줘야 함
 2. DSM → 제어판 → 작업 스케줄러 → 생성 → 예약된 작업 → 사용자 정의 스크립트
 3. 일반 탭
     1. 작업: 작업명 지정
@@ -161,10 +170,10 @@ from Hansu Kim (cpm0722@kakao.com)
 4. 스케줄 탭
     - 시간 및 주기 지정
 5. 작업 설정 탭
-    - 실행 명령에 스크립트 경로 지정
+    - 실행 명령에 스크립트 절대 경로 지정
 
         ```bash
-        bash /스크립트 파일 절대 경로
+        start.sh 스크립트 파일 절대 경로
         ```
 ## 라이센스
     
