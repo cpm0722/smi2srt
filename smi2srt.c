@@ -74,6 +74,20 @@ void smi2srt(char path[PATH_LEN])
 		fprintf(stderr, "%s are converted.\n", path + strlen(nowRootDir));	//log.txt에 추가
 	else										//TMPFILE의 size 0인 경우 (CONVERT error 발생한 경우)
 		fprintf(errorFp, "%s\n", path);			//error.txt에 추가
+	
+	char jaPath[PATH_LEN];					//.ja.srt의 경로
+	strcpy(jaPath, path);
+	*(jaPath + strlen(jaPath) - strlen(".smi")) = '\0';	// .ja.srt 경로 생성
+	strcat(jaPath, ".ja.srt");
+	if(!access(jaPath, F_OK)){			//.ja.srt가 존재할 경우
+		char koPath[PATH_LEN];			//.ko.srt 경로 생성
+		strcpy(koPath, jaPath);
+		char *str = koPath + strlen(koPath) - strlen(".ja.srt"); 
+		str[1] = 'k';
+		str[2] = 'o';
+
+		rename(jaPath, koPath);
+	}
 
 	return;
 }
