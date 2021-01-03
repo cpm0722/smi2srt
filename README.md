@@ -2,7 +2,7 @@
 
 from Hansu Kim (cpm0722@kakao.com)
 
-# [Notion Page Link](https://www.notion.so/cpm0722/smi2srt-for-plex-in-synology-7972146aa67f4f27ac2d08991c477839)
+# [Notion Page Link](https://www.notion.so/cpm0722/smi2srt-for-plex-in-synology-229efd42fe90465f871324914569d29f)
 
 ## 주요 기능
 - 특정 디렉터리를 재귀적으로 탐색(하위 폴더 전부)하여 smi 파일을 찾아 srt 파일로 변경
