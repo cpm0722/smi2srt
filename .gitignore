@@ -1,13 +1,6 @@
 .DS_Store
 *.tmp
-*.o
 log.txt
 time.txt
 error.txt
 start.sh
-smi/
-smi_1/
-smi_2/
-smi_bak/
-test/
-test_bak/
