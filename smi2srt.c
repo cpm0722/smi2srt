@@ -14,11 +14,11 @@
 #define CMD_LEN PATH_LEN * 2 + 20
 #define TIME_LEN 40
 
-#define CONVERT "/usr/local/bin/smi2srt -n \""	//CONVERT 명령어
-#define LOGDIR	"/log"				//log를 저장하는 디렉터리, docker 외부에서 mount
+#define CONVERT "smi2srt -n \""		//CONVERT 명령어
+#define LOGDIR	"/smi2srt_log"		//log를 저장하는 디렉터리, docker 외부에서 mount
 #define TMPFILE "/smi2srt/tmp.tmp"	//출력 결과를 임시 저장하는 임시 파일의 경로
-#define LOGFILE "/log/log.txt"		//로그 저장하는 파일의 경로			
-#define TIMEFILE "/log/time.txt"	//최종 수행 시각을 저장하는 파일의 경로
+#define LOGFILE LOGDIR "/log.txt"	//로그 저장하는 파일의 경로			
+#define TIMEFILE LOGDIR "/time.txt"	//최종 수행 시각을 저장하는 파일의 경로
 
 #define STDOUT_SAVE 100			//임시로 stdout을 저장하는 fd
 #define STDERR_SAVE 101			//임시로 stderr을 저장하는 fd
@@ -89,7 +89,7 @@ void smi2srt(char path[PATH_LEN])
 		exit(1);
 	}
 	if(statbuf.st_size > 0)						//TMPFILE의 size 0 이상인 경우 (CONVERT 정상 수행된 경우)
-		fprintf(stderr, "%s are converted.\n", path + strlen(nowRootDir));	//log.txt에 추가
+		fprintf(stderr, "%s\n", path + strlen(nowRootDir));	//log.txt에 추가
 	else										//TMPFILE의 size 0인 경우 (CONVERT error 발생한 경우)
 		fprintf(stderr, "*****[CONVERT ERROR]***** %s\n", path);			//log.txt에 error 기록 추가
 	
