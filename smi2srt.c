@@ -222,7 +222,8 @@ void get_abs_path(char result[PATH_LEN], char *path)
 	}
 
 	strcpy(result, pwd);
-	strcat(result, "/");
+	if (strcmp(pwd, "/"))
+		strcat(result, "/");
 	strcat(result, path);
 
 	return;
