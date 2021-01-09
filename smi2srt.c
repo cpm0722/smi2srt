@@ -18,7 +18,7 @@
 #define LOGDIR	"/smi2srt_log"		//log를 저장하는 디렉터리, docker 외부에서 mount
 #define TMPFILE "/smi2srt/tmp.tmp"	//출력 결과를 임시 저장하는 임시 파일의 경로
 #define LOGFILE LOGDIR "/log.txt"	//로그 저장하는 파일의 경로			
-#define TIMEFILE LOGDIR "/time.txt"	//최종 수행 시각을 저장하는 파일의 경로
+#define TIMEFILE LOGDIR "/time.bin"	//최종 수행 시각을 저장하는 파일의 경로
 
 #define STDOUT_SAVE 100			//임시로 stdout을 저장하는 fd
 #define STDERR_SAVE 101			//임시로 stderr을 저장하는 fd
