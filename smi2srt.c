@@ -15,31 +15,49 @@
 #define TIME_LEN 40
 
 #define CONVERT "/usr/local/bin/smi2srt -n \""	//CONVERT 명령어
-#define TMPFILE "tmp.tmp"		//출력 결과를 임시 저장하는 임시 파일의 경로
-#define LOGFILE "log.txt"		//로그 저장하는 파일의 경로			
-#define ERRFILE "error.txt"		//error 로그 저장하는 파일의 경로
-#define TIMEFILE "time.txt"		//최종 수행 시각을 저장하는 파일의 경로
+#define LOGDIR	"/log"				//log를 저장하는 디렉터리, docker 외부에서 mount
+#define TMPFILE "/smi2srt/tmp.tmp"	//출력 결과를 임시 저장하는 임시 파일의 경로
+#define LOGFILE "/log/log.txt"		//로그 저장하는 파일의 경로			
+#define TIMEFILE "/log/time.txt"	//최종 수행 시각을 저장하는 파일의 경로
 
 #define STDOUT_SAVE 100			//임시로 stdout을 저장하는 fd
 #define STDERR_SAVE 101			//임시로 stderr을 저장하는 fd
 
 typedef enum {false, true} bool;
 
-bool backup = false;			//-b 옵션 여부 저장
-bool noTimeSave = false;		//-nts 옵션 여부 저장
+void system_rename(char src[PATH_LEN], char dst[PATH_LEN]);
+void redirection(char *cmd, const char *tmpFile);
+void smi2srt(char path[PATH_LEN]);
+void mkdir_recursive(char path[PATH_LEN]);
+void search_directory(char *path);
+void get_abs_path(char result[PATH_LEN], char *path);
 
-char cmd[CMD_LEN] = CONVERT;			//CONVERT 명령어 저장
+bool backup = false;			//-b 옵션 여부 저장
+
+char cmd[CMD_LEN] = CONVERT;	//CONVERT 명령어 저장
 
 char pwd[PATH_LEN];				//현재 실행 경로 저장
 
 char nowRootDir[PATH_LEN];		//명령어 인자로 넘겨받은 경로의 절대 경로 저장
 char backupDir[PATH_LEN];		//-b 옵션 시 인자로 넘겨받은 backup 디렉터리의 절대 경로 저장
 
-FILE *errorFp;			//error.txt FILE 포인터
-
 time_t startTime;		//시작 시간
 time_t lastTime;		//프로그램이 가장 최근에 실행됐던 시간
 char strTime[TIME_LEN];	//시작 시간을 문자열로 저장
+
+//system 함수 사용해 mv 명령어 실행하는 함수
+//다른 device 간 파일 이동을 위해 rename 함수 호출 시 cross-device error 발생하기 때문
+void system_rename(char src[PATH_LEN], char dst[PATH_LEN])
+{
+	char cmd[PATH_LEN*2+10];
+	strcpy(cmd, "mv \"");
+	strcat(cmd, src);
+	strcat(cmd, "\" \"");
+	strcat(cmd, dst);
+	strcat(cmd, "\"");
+	system(cmd);
+	return;
+}
 
 //cmd를 수행하면서 출력 결과를 stdout이 아닌 tmpFile에 저장하는 함수
 void redirection(char *cmd, const char *tmpFile)
@@ -73,7 +91,7 @@ void smi2srt(char path[PATH_LEN])
 	if(statbuf.st_size > 0)						//TMPFILE의 size 0 이상인 경우 (CONVERT 정상 수행된 경우)
 		fprintf(stderr, "%s are converted.\n", path + strlen(nowRootDir));	//log.txt에 추가
 	else										//TMPFILE의 size 0인 경우 (CONVERT error 발생한 경우)
-		fprintf(errorFp, "%s\n", path);			//error.txt에 추가
+		fprintf(stderr, "*****[CONVERT ERROR]***** %s\n", path);			//log.txt에 error 기록 추가
 	
 	char jaPath[PATH_LEN];					//.ja.srt의 경로
 	strcpy(jaPath, path);
@@ -187,13 +205,7 @@ void search_directory(char *path)
 					strcat(backupPath, "/");			//부모 디렉터리 경로가 아닌 전체 경로로 복원
 					strcat(backupPath, fname);
 
-					if(rename(nowPath, backupPath)<0){	//backup 디렉터리로 mv
-						fprintf(stderr, "rename error for %s\n", backupPath);
-						if(access(nowPath, W_OK) < 0)
-							fprintf(stderr, "access error for %s\n", nowPath);
-						if(access(backupPath, W_OK) < 0)
-							fprintf(stderr, "access error for %s\n", backupPath);
-					}
+					system_rename(nowPath, backupPath);	//backup 디렉터리로 mv
 				}
 			}
 		}
@@ -230,14 +242,6 @@ int main(int argc, char *argv[])
 			get_abs_path(backupDir, argv[++i]);	//-b 직후 인자의 절대 경로 구해 backupDir에 저장
 			fprintf(stderr, "backup: %s\nbackupDir: %s\n", backup?"true":"false", backupDir);
 		}
-		else if(!strcmp(argv[i], "-nts"))	//-nts 옵션일 경우
-			noTimeSave = true;				//backup = true
-		else if(!strcmp(argv[i], "-pwd")){
-			get_abs_path(pwd, argv[++i]);
-			fprintf(stderr, "pwd: %s\n", pwd);
-			if(chdir(pwd) < 0)
-				fprintf(stderr, "chdir error for %s\n", pwd);
-		}
 	}
 
 	startTime = time(NULL);			//시작 시간 startTime에 저장
@@ -259,11 +263,6 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if((errorFp = fopen(ERRFILE, "a+")) < 0){			//ERRFILE write(append) 권한으로 open
-		fprintf(stderr, "fopen error for %s\n", ERRFILE);
-		exit(1);
-	}
-
 	int logFd;
 	if((logFd = open(LOGFILE, O_WRONLY | O_APPEND | O_CREAT, 0644)) < 0){	//LOGFILE write(append) 권한으로 open
 		fprintf(stderr, "open error for %s\n", LOGFILE);
@@ -272,27 +271,13 @@ int main(int argc, char *argv[])
 	dup2(STDERR_FILENO, STDERR_SAVE);		//STDERR을 LOGFILE으로 변경
 	dup2(logFd, STDERR_FILENO);
 
-	fprintf(stderr, "\n*** [%s] start ***\n", strTime);	//LOGFILE에 현재 시각 write
-	fprintf(errorFp, "\n*** [%s] start ***\n", strTime);	//ERRFILE에 현재 시각 write
-
-	for(int i = 0; i < argc; i++){				//LOGFILE과 ERRFILE에 명령어 write
-		fprintf(stderr, "%s ", argv[i]);
-		fprintf(errorFp, "%s ", argv[i]);
-	}
-	fprintf(stderr, "\n\n");
-	fprintf(errorFp, "\n\n");
+	fprintf(stderr, "\n*** [%s] start ***\n\n", strTime);	//LOGFILE에 현재 시각 write
 
 	for(int i = 1; i < argc; i++){			//인자 탐색하며 search_directory 호출
 		if(!strcmp(argv[i], "-b")){			//-b 옵션일 경우
 			i++;							//직후 인자도 skip
 			continue;
 		}
-		else if(!strcmp(argv[i], "-pwd")){	//-pwd 옵션일 경우
-			i++;							//직후 인자도 skip
-			continue;
-		}
-		else if(!strcmp(argv[i], "-nts"))	//-nts 옵션일 경우
-			continue;
 		char nowPath[PATH_LEN];							//현재 인자의 절대 경로 저장
 		get_abs_path(nowPath, argv[i]);
 		strcpy(nowRootDir, nowPath);					//현재 인자의 절대 경로 nowRootDir에 저장
@@ -307,20 +292,17 @@ int main(int argc, char *argv[])
 	}
 
 	close(logFd);
-	fclose(errorFp);
 
-	if(!noTimeSave){	//nts 옵션 false일 경우에만
-		int timeFd;
-		if((timeFd = open(TIMEFILE, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0){	//TIMEFILE write 권한으로 open
-			fprintf(stderr, "open error for %s\n", TIMEFILE);
-			exit(1);
-		}
-		time_t now = time(NULL);
-		if(write(timeFd, &now, sizeof(time_t)) <= 0){			//현재 시각 TIMEFILE에 write
-			fprintf(stderr, "write error for %s\n", TIMEFILE);
-		}
-		close(timeFd);
+	int timeFd;
+	if((timeFd = open(TIMEFILE, O_WRONLY | O_CREAT | O_TRUNC, 0644)) < 0){	//TIMEFILE write 권한으로 open
+		fprintf(stderr, "open error for %s\n", TIMEFILE);
+		exit(1);
 	}
+	time_t now = time(NULL);
+	if(write(timeFd, &now, sizeof(time_t)) <= 0){			//현재 시각 TIMEFILE에 write
+		fprintf(stderr, "write error for %s\n", TIMEFILE);
+	}
+	close(timeFd);
 
 	dup2(STDERR_SAVE, STDERR_FILENO);							//stderr 복원
 
