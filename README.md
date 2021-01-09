@@ -11,6 +11,7 @@ from Hansu Kim (cpm0722@kakao.com)
 ## 실행 조건
 - Docker 사용이 가능한 Synology 제품
 
+## 사용 방법
 1. 스크립트 파일 NAS에 업로드
 
     [make_script.sh 다운로드](https://github.com/cpm0722/smi2srt/raw/main/make_script.sh)
@@ -56,13 +57,14 @@ from Hansu Kim (cpm0722@kakao.com)
 
     스크립트의 안내문을 따라서 경로들을 입력한다. 이 때 주의할 점은 2가지가 있다.
 
-    1. 스크립트에 입력하는 모든 경로들에는 공백이 포함되지 않아야 한다.
-    2. smi 파일을 백업하고자 할 때 smi 파일의 백업 디렉터리는 탐색을 수행할 디렉터리 내부에 있어서는 안된다.
+    - 스크립트에 입력하는 모든 경로들에는 공백이 포함되지 않아야 한다.
+    - smi 파일을 백업하고자 할 때 smi 파일의 백업 디렉터리는 탐색을 수행할 디렉터리 내부에 있어서는 안된다.
 5. DSM → 패키지 센터 → 커뮤니티 → Docker 설치
-    - Docker가 없는 경우 설치됨 탭에서 이미 Docker가 설치되어 있는지 확인한다.
+
+    Docker가 없는 경우 설치됨 탭에서 이미 Docker가 설치되어 있는지 확인한다.
 6. DSM → Docker 실행
-7. 레지스트리 탭 → cpm0722/smi2srt 검색 → latest 다운로드
-8. 이미지 탭 → cpm0722/smi2srt:latest 실행
+7. 레지스트리 탭 → cpm0722/smi2srt 검색 → latest 선택
+8. 이미지 탭 → cpm0722/smi2srt:latest 선택 -> 실행
 
     컨테이너 이름을 **smi2srt**로 변경한다. 이후 고급 설정에 들어간다.
 
@@ -101,7 +103,7 @@ from Hansu Kim (cpm0722@kakao.com)
 
     확인 버튼을 누른다. 이후 생성한 smi2srt 작업을 활성화 체크를 한 후 꼭 **저장** 버튼을 누른다.
 
-# 로그 확인
+## 로그 확인
 
 smi2srt 디렉터리 내 log 디렉터리의 log.txt을 열어 확인할 수 있다.
 
