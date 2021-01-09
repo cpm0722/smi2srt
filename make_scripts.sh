@@ -122,7 +122,7 @@ for VOLUME in $VOLUMES; do	# VOLUMES 탐색
 	RUN_CMD="$RUN_CMD -v $VOLUME:$VOLUME"	# 각 volume mount 위해 RUN_CMD에 추가
 done
 
-RUN_CMD="$RUN_CMD smi2srt /bin/bash"
+RUN_CMD="$RUN_CMD cpm0722/smi2srt /bin/bash"
 
 echo "#!/bin/bash" > run.sh		# run.sh 작성
 echo "" >> run.sh
@@ -152,7 +152,7 @@ echo 'TMP=0		# before words' >> exec.sh
 echo 'ID=0		# smi2srt container id' >> exec.sh
 echo '' >> exec.sh
 echo 'for word in $PS;	do # docker list search' >> exec.sh
-echo '	if [[ $word == "smi2srt" ]]; then' >> exec.sh
+echo '	if [[ $word == "cpm0722/smi2srt" ]]; then' >> exec.sh
 echo '		ID=$TMP	# save smi2srt before token to ID' >> exec.sh
 echo '	fi' >> exec.sh
 echo '	TMP=$word	# save before token to TMP' >> exec.sh
