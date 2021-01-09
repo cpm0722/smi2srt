@@ -34,8 +34,6 @@ from Hansu Kim (cpm0722@kakao.com)
         5. Open
         6. DSM 계정의 비밀번호 입력
 
-            키보드를 입력하더라도 화면에 출력이 되지 않을 수 있으나 정상적으로 입력 중인 것이므로 정확히 비밀번호 입력후 엔터를 누르면 된다.
-
     - Mac
         1. Mac 터미널에서 명령어 입력
 
@@ -47,7 +45,6 @@ from Hansu Kim (cpm0722@kakao.com)
 
         2. DSM 계정의 비밀번호 입력
 
-            키보드를 입력하더라도 화면에 출력이 되지 않을 수 있으나 정상적으로 입력 중인 것이므로 정확히 비밀번호 입력후 엔터를 누르면 된다.
 
 4. 터미널에서 다음 명령어를 한 줄 씩 입력한다. 스크립트가 실행된다.
 
@@ -99,7 +96,7 @@ from Hansu Kim (cpm0722@kakao.com)
         사용자 정의 스크립트를 아래와 같이 작성한다.
 
         ```bash
-        /var/services/homes/**DSM계정명**/smi2srt/exec.sh
+        /var/services/homes/[DSM계정명]/smi2srt/exec.sh
         ```
 
     확인 버튼을 누른다. 이후 생성한 smi2srt 작업을 활성화 체크를 한 후 꼭 **저장** 버튼을 누른다.
