@@ -9,6 +9,9 @@ from Hansu Kim (cpm0722@kakao.com)
 - 실행 내역에 대한 로그 파일 log.txt 생성
 - 에러 발생 내역에 대한 로그 파일 error.txt 생성
 
+## 실행 조건
+- Intel(x86) CPU를 사용하는 Synology 제품
+
 ## 매뉴얼
 ### [개발자용 매뉴얼](https://www.notion.so/cpm0722/smi2srt-for-plex-in-synology-7972146aa67f4f27ac2d08991c477839)
 ### [초보자용 매뉴얼](https://www.notion.so/cpm0722/smi2srt-for-plex-in-synology-229efd42fe90465f871324914569d29f)
