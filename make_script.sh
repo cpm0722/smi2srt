@@ -34,18 +34,35 @@ while true; do
 	fi
 
 	#####################
+	#     -ko option    #
+	#####################
+
+	echo ""
+	echo "srt, ass 파일들의 파일명에 일괄적으로 '.ko'를 부여하시겠습니까?"
+	echo "PLEX 상에서 언어가 '알수없음'이 아닌 '한국어'로 표시되지만, PLEX 이외 프로그램들에서 자막을 자동으로 인식하지 못합니다. (y/n)"
+	read KO_OPTION # ko 부여 옵션 입력 받기 (y/n)
+
+	#####################
 	#       Check       #
 	#####################
 
 	echo ""
 	echo "입력하신 디렉터리 목록은 다음과 같습니다."
 	echo "$DIR_PATHS"	
+	echo ""
 	if [[ ${B_OPTION,,} == "y" ]]; then
 		echo "smi 파일 일괄 이동 옵션을 선택하셨습니다. 경로는 다음과 같습니다."
 		echo "$SMI_DIR"
 	else
 		echo "smi 파일 일괄 이동 옵션을 선택하지 않으셨습니다."
 	fi
+	echo ""
+	if [[ ${KO_OPTION,,} == "y" ]]; then
+		echo "'.ko' 옵션을 선택하셨습니다."
+	else
+		echo "'.ko' 옵션을 선택하지 않으셨습니다."
+	fi
+	echo ""
 	echo "위의 내용이 정확합니까? (y/n)"
 	read CORRECT
 
@@ -69,7 +86,12 @@ fi
 #   Make exec.sh    #
 #####################
 
-START_CMD="/smi2srt/smi2srt "	# docker 내에서 smi2srt 실행하는 명령어
+START_CMD="/smi2srt/smi2srt"	# docker 내에서 smi2srt 실행하는 명령어
+
+if [[ ${KO_OPTION,,} == "y" ]]; then	# ko 부여하는 경우
+	START_CMD="$START_CMD -ko"
+fi
+
 
 if [[ ${B_OPTION,,} == "y" ]]; then		# smi 파일 backup 옵션 추가
 	START_CMD="$START_CMD -b $SMI_DIR"	# smi backup 경로 추가
