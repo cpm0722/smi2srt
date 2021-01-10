@@ -89,9 +89,12 @@ int rename_to_ko(char path[PATH_LEN])
 	strcpy(dstPath, path);
 	*(dstPath + strlen(dstPath) - strlen(".srt")) = '\0';	//확장자 제외
 	strcat(dstPath, postfix);	//언어 명시 및 확장자 부여
-	if(rename(dstPath, path) < 0){	//rename 수행
+	if(rename(path, dstPath) < 0){	//rename 수행
 		fprintf(stderr, "rename error for %s to %s\n", path, dstPath);
 		return 1;
+	}
+	else{
+		fprintf(stderr, "rename %s to %s\n", path, dstPath);
 	}
 	return 0;
 }
