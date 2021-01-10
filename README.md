@@ -1,6 +1,6 @@
 # smi2srt for PLEX in Synology v2.1
 
-Made by Hansu Kim (cpm0722@kakao.com)
+Made by Hansu Kim (cpm0722@gmail.com)
 
 ## 주요 기능
 - 특정 디렉터리 내부를 탐색하여 smi 파일을 찾아 srt 파일로 변환
