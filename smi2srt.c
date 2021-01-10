@@ -28,6 +28,7 @@ typedef enum {false, true} bool;
 int system_rename(char src[PATH_LEN], char dst[PATH_LEN]);
 int redirection(char *cmd, const char *tmpFile);
 int rename_to_ko(char path[PATH_LEN]);
+int rename_to_non_ko(char path[PATH_LEN]);
 int smi2srt(char path[PATH_LEN]);
 int mkdir_recursive(char path[PATH_LEN]);
 int search_directory(char *path);
@@ -99,6 +100,28 @@ int rename_to_ko(char path[PATH_LEN])
 	return 0;
 }
 
+//srt, ass 파일에 .ko를 제거하는 함수
+int rename_to_non_ko(char path[PATH_LEN])
+{
+	if(*(path + strlen(path) - strlen(".xx.srt")) != '.')	//이미 파일명에 언어가 명시되지 않은 경우 종료
+		return 0;
+	char postfix[10];
+	strcpy(postfix, path + strlen(path) - strlen(".srt"));	//언어 명시 없는 .srt 또는 .ass 생성
+	char dstPath[PATH_LEN];
+	memset(dstPath, PATH_LEN, '\0');
+	strcpy(dstPath, path);
+	*(dstPath + strlen(dstPath) - strlen(".ko.srt")) = '\0';	//언어 명시자, 확장자 제외
+	strcat(dstPath, postfix);	//확장자 부여
+	if(rename(path, dstPath) < 0){	//rename 수행
+		fprintf(stderr, "rename error for %s to %s\n", path, dstPath);
+		return 1;
+	}
+	else{
+		fprintf(stderr, "rename %s to %s\n", path, dstPath);
+	}
+	return 0;
+}
+
 //smi를 srt로 변환하는 함수
 int smi2srt(char path[PATH_LEN])
 {
@@ -121,14 +144,17 @@ int smi2srt(char path[PATH_LEN])
 	strcpy(jaPath, path);
 	*(jaPath + strlen(jaPath) - strlen(".smi")) = '\0';	// .ja.srt 경로 생성
 	strcat(jaPath, ".ja.srt");
-	if(!access(jaPath, F_OK)){			//.ja.srt가 존재할 경우
-		char koPath[PATH_LEN];			//.ko.srt 경로 생성
-		strcpy(koPath, jaPath);
-		char *str = koPath + strlen(koPath) - strlen(".ja.srt"); 
-		str[1] = 'k';
-		str[2] = 'o';
-
+	char koPath[PATH_LEN];			//.ko.srt 경로 생성
+	strcpy(koPath, jaPath);
+	char *str = koPath + strlen(koPath) - strlen(".ja.srt"); 
+	str[1] = 'k';
+	str[2] = 'o';
+	if(access(jaPath, F_OK) == 0 && access(koPath, F_OK) < 0){	//.ja.srt가 존재하면서 .ko.srt는 존재하지 않는 경우
 		rename(jaPath, koPath);
+	}
+
+	if(!korean){	// -ko 옵션이 아닌 경우
+		rename_to_non_ko(koPath);
 	}
 
 	return 0;
