@@ -1,4 +1,4 @@
-# smi2srt for plex in synology v2.1
+# smi2srt for PLEX in Synology v2.1
 
 Made by Hansu Kim (cpm0722@kakao.com)
 
