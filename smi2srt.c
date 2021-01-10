@@ -25,14 +25,16 @@
 
 typedef enum {false, true} bool;
 
-void system_rename(char src[PATH_LEN], char dst[PATH_LEN]);
-void redirection(char *cmd, const char *tmpFile);
-void smi2srt(char path[PATH_LEN]);
-void mkdir_recursive(char path[PATH_LEN]);
-void search_directory(char *path);
-void get_abs_path(char result[PATH_LEN], char *path);
+int system_rename(char src[PATH_LEN], char dst[PATH_LEN]);
+int redirection(char *cmd, const char *tmpFile);
+int rename_to_ko(char path[PATH_LEN]);
+int smi2srt(char path[PATH_LEN]);
+int mkdir_recursive(char path[PATH_LEN]);
+int search_directory(char *path);
+int get_abs_path(char result[PATH_LEN], char *path);
 
 bool backup = false;			//-b 옵션 여부 저장
+bool korean = false;			//-ko 옵션 여부 저장
 
 char cmd[CMD_LEN] = CONVERT;	//CONVERT 명령어 저장
 
@@ -47,7 +49,7 @@ char strTime[TIME_LEN];	//시작 시간을 문자열로 저장
 
 //system 함수 사용해 mv 명령어 실행하는 함수
 //다른 device 간 파일 이동을 위해 rename 함수 호출 시 cross-device error 발생하기 때문
-void system_rename(char src[PATH_LEN], char dst[PATH_LEN])
+int system_rename(char src[PATH_LEN], char dst[PATH_LEN])
 {
 	char cmd[PATH_LEN*2+10];
 	strcpy(cmd, "mv \"");
@@ -56,27 +58,46 @@ void system_rename(char src[PATH_LEN], char dst[PATH_LEN])
 	strcat(cmd, dst);
 	strcat(cmd, "\"");
 	system(cmd);
-	return;
+	return 0;
 }
 
 //cmd를 수행하면서 출력 결과를 stdout이 아닌 tmpFile에 저장하는 함수
-void redirection(char *cmd, const char *tmpFile)
+int redirection(char *cmd, const char *tmpFile)
 {
 	int tmpFd;
 	if((tmpFd = open(tmpFile, O_RDWR | O_CREAT | O_TRUNC, 0644)) < 0){	//tmpFile open
 		fprintf(stderr, "open error for %s\n", tmpFile);
-		exit(1);
+		return 1;
 	}
 	dup2(STDOUT_FILENO, STDOUT_SAVE);	//stdout 임시 저장
 	dup2(tmpFd, STDOUT_FILENO);			//tmpFd를 stdout으로
 	system(cmd);						//명령어 실행
 	dup2(STDOUT_SAVE, STDOUT_FILENO);	//stdout 복원
 	close(tmpFd);
-	return;
+	return 0;
+}
+
+//srt, ass 파일에 .ko를 추가하는 함수
+int rename_to_ko(char path[PATH_LEN])
+{
+	if(*(path + strlen(path) - strlen(".xx.srt")) == '.')	//이미 파일명에 언어가 명시된 경우 종료
+		return 0;
+	char postfix[10] = ".ko";
+	strcat(postfix, path + strlen(path) - strlen(".srt"));	//.ko.srt 또는 .ko.ass 생성
+	char dstPath[PATH_LEN];
+	memset(dstPath, PATH_LEN, '\0');
+	strcpy(dstPath, path);
+	*(dstPath + strlen(dstPath) - strlen(".srt")) = '\0';	//확장자 제외
+	strcat(dstPath, postfix);	//언어 명시 및 확장자 부여
+	if(rename(dstPath, path) < 0){	//rename 수행
+		fprintf(stderr, "rename error for %s to %s\n", path, dstPath);
+		return 1;
+	}
+	return 0;
 }
 
 //smi를 srt로 변환하는 함수
-void smi2srt(char path[PATH_LEN])
+int smi2srt(char path[PATH_LEN])
 {
 	strcpy(cmd + strlen(CONVERT), path);	//CONVERT 명령어 완성
 	strcat(cmd, "\"");
@@ -86,7 +107,7 @@ void smi2srt(char path[PATH_LEN])
 	struct stat statbuf;
 	if(stat(TMPFILE, &statbuf) < 0){			//TMPFILE stat 획득
 		fprintf(stderr, "stat error for %s\n", TMPFILE);
-		exit(1);
+		return 1;
 	}
 	if(statbuf.st_size > 0)						//TMPFILE의 size 0 이상인 경우 (CONVERT 정상 수행된 경우)
 		fprintf(stderr, "%s\n", path + strlen(nowRootDir));	//log.txt에 추가
@@ -107,20 +128,20 @@ void smi2srt(char path[PATH_LEN])
 		rename(jaPath, koPath);
 	}
 
-	return;
+	return 0;
 }
 
 //디렉터리를 재귀적으로 모두 mkdir하는 함수
-void mkdir_recursive(char path[PATH_LEN])
+int mkdir_recursive(char path[PATH_LEN])
 {
 	int len = strlen(path);
 	if(len < strlen(backupDir))
-		return;
+		return 0;
 	int i;
 	for(i = len; i >= 0; i--){				//부모 경로가 끝나는 idx를 i에 저장
 		if(path[i] == '/'){
 			break;
-		}
+	}
 	}
 	if(access(path, F_OK) < 0){				//path 디렉터리가 없을 경우
 		char parentPath[PATH_LEN];			//parentPath에 부모 디렉터리 경로 저장
@@ -129,21 +150,23 @@ void mkdir_recursive(char path[PATH_LEN])
 		if(access(parentPath, F_OK) < 0)	//부모 디렉터리 없을 경우
 			mkdir_recursive(parentPath);	//재귀 호출
 	}
-	if(mkdir(path, 0755) < 0)				//path 디렉터리 mkdir
+	if(mkdir(path, 0755) < 0){				//path 디렉터리 mkdir
 		fprintf(stderr, "mkdir error for %s\n", path);
+		return 1;
+	}
 	else
 		fprintf(stderr, "mkdir %s\n", path);
 
-	return;
+	return 0;
 }
 
 //재귀적으로 디렉터리 탐색하며 smi 파일 찾아 smi2srt 호출하는 함수
-void search_directory(char *path)
+int search_directory(char *path)
 {
 	DIR *dirp;
 	if((dirp = opendir(path)) == NULL){			//디렉터리 open
 		fprintf(stderr, "opendir error for %s\n", path);
-		exit(1);
+		return 1;
 	}
 	struct dirent *dentry;
 	while((dentry = readdir(dirp)) != NULL){	//디렉터리 탐색
@@ -159,7 +182,7 @@ void search_directory(char *path)
 		struct stat statbuf;
 		if(stat(nowPath, &statbuf) < 0){		//현재 파일에 대한 stat 획득
 			fprintf(stderr, "stat error for %s\n", nowPath);
-			exit(1);
+			return 1;
 		}
 
 		if(S_ISDIR(statbuf.st_mode)){			//현재 파일이 디렉터리인 경우
@@ -167,8 +190,16 @@ void search_directory(char *path)
 				search_directory(nowPath);		//해당 디렉터리에 대해 재귀 호출
 		}
 
-		else{									//현재 파일이 디렉터리가 아닌 일반 파일인 경우
-			if(!strcmp(nowPath+strlen(nowPath)-4, ".smi") || !strcmp(nowPath+strlen(nowPath)-4, ".SMI")){	//확장자가 smi 또는 SMI인 경우
+		else{	//현재 파일이 디렉터리가 아닌 일반 파일인 경우
+			if( !strcmp(nowPath+strlen(nowPath)-4, ".srt") ||	//확장자가 srt인 경우
+				!strcmp(nowPath+strlen(nowPath)-4, ".SRT") ||	
+				!strcmp(nowPath+strlen(nowPath)-4, ".ass") || 
+				!strcmp(nowPath+strlen(nowPath)-4, ".ASS")){	//확장자가 ass인 경우
+				if(korean){	//-ko 옵션이 true인 경우
+					rename_to_ko(nowPath);	//파일명의 끝에 .ko 추가
+				}
+			}
+			else if(!strcmp(nowPath+strlen(nowPath)-4, ".smi") || !strcmp(nowPath+strlen(nowPath)-4, ".SMI")){	//확장자가 smi 또는 SMI인 경우
 
 				char srtPath[PATH_LEN];			//srt 경로 생성
 				strcpy(srtPath, nowPath);
@@ -210,15 +241,15 @@ void search_directory(char *path)
 			}
 		}
 	}
-	return;
+	return 0;
 }
 
 //상대 경로를 절대경로로 변경해 result에 저장하는 함수
-void get_abs_path(char result[PATH_LEN], char *path)
+int get_abs_path(char result[PATH_LEN], char *path)
 {
 	if(path[0] == '/' || path[0] == '~'){
 		strcpy(result, path);
-		return;
+		return 0;
 	}
 
 	strcpy(result, pwd);
@@ -226,7 +257,7 @@ void get_abs_path(char result[PATH_LEN], char *path)
 		strcat(result, "/");
 	strcat(result, path);
 
-	return;
+	return 0;
 }
 
 int main(int argc, char *argv[])
@@ -242,6 +273,9 @@ int main(int argc, char *argv[])
 			backup = true;					//backup = true
 			get_abs_path(backupDir, argv[++i]);	//-b 직후 인자의 절대 경로 구해 backupDir에 저장
 			fprintf(stderr, "backup: %s\nbackupDir: %s\n", backup?"true":"false", backupDir);
+		}
+		if(!strcmp(argv[i], "-ko")){		//-ko 옵션일 경우
+			korean = true;					//korean = true
 		}
 	}
 
@@ -277,6 +311,9 @@ int main(int argc, char *argv[])
 	for(int i = 1; i < argc; i++){			//인자 탐색하며 search_directory 호출
 		if(!strcmp(argv[i], "-b")){			//-b 옵션일 경우
 			i++;							//직후 인자도 skip
+			continue;
+		}
+		else if(!strcmp(argv[i], "-ko")){	//-ko 옵션일 경우 skip
 			continue;
 		}
 		char nowPath[PATH_LEN];							//현재 인자의 절대 경로 저장
