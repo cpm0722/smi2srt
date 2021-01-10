@@ -21,8 +21,10 @@ Made by Hansu Kim (cpm0722@kakao.com)
 2. DSM → 제어판 → 터미널 및 SNMP → 터미널 → SSH 서비스 활성화
 
     ssh 접속 시 사용할 원하는 포트 번호를 지정한다. 이미 지정이 되어있는 경우 다음 단계로 넘어간다.
+3. DSM → 패키지 센터 → 커뮤니티 → Docker 설치
 
-3. ssh로 NAS 터미널에 접속한다. PC 운영체제에 따라 방법이 다르다.
+    Docker가 없는 경우 설치됨 탭에서 이미 Docker가 설치되어 있는지 확인한다.
+4. ssh로 NAS 터미널에 접속한다. PC 운영체제에 따라 방법이 다르다.
     - Windows
         1. PuTTY 설치
 
@@ -45,9 +47,13 @@ Made by Hansu Kim (cpm0722@kakao.com)
             만약 admin 계정으로 192.168.255.255에 22번 포트로 접속하는 경우라면 `ssh admin@192.168.255.255 -p 22`가 될 것이다.
 
         2. DSM 계정의 비밀번호 입력
-
-
-4. 터미널에서 다음 명령어를 한 줄 씩 입력한다. 스크립트가 실행된다.
+5. 터미널에서 다음 명령어를 입력한다. docker image가 다운로드된다.
+   
+    ```
+    sudo docker pull cpm0722/smi2srt
+    ```
+    
+5. 터미널에서 다음 명령어를 한 줄 씩 입력한다. 스크립트가 실행된다.
 
     ```
     cd ~/smi2srt
@@ -59,12 +65,7 @@ Made by Hansu Kim (cpm0722@kakao.com)
 
     - 스크립트에 입력하는 모든 경로들에는 공백이 포함되지 않아야 한다.
     - smi 파일을 백업하고자 할 때 smi 파일의 백업 디렉터리는 탐색을 수행할 디렉터리 내부에 있어서는 안된다.
-5. DSM → 패키지 센터 → 커뮤니티 → Docker 설치
-
-    Docker가 없는 경우 설치됨 탭에서 이미 Docker가 설치되어 있는지 확인한다.
-6. DSM → Docker 실행
-7. 레지스트리 탭 → cpm0722/smi2srt 검색 → latest 선택
-8. 이미지 탭 → cpm0722/smi2srt:latest 선택 -> 실행
+6. DSM → Docker → 이미지 탭 → cpm0722/smi2srt:latest 선택 → 실행
 
     컨테이너 이름을 **smi2srt**로 변경한다. 이후 고급 설정에 들어간다.
 
