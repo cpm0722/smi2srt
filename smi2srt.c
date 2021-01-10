@@ -116,9 +116,6 @@ int rename_to_non_ko(char path[PATH_LEN])
 		fprintf(stderr, "rename error for %s to %s\n", path, dstPath);
 		return 1;
 	}
-	else{
-		fprintf(stderr, "rename %s to %s\n", path, dstPath);
-	}
 	return 0;
 }
 
