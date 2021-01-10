@@ -1,6 +1,7 @@
 .DS_Store
+smi2srt
 *.tmp
+exec.sh
+log/*
 log.txt
-time.txt
-error.txt
-start.sh
+time.bin

@@ -79,23 +79,11 @@ START_CMD="$START_CMD $DIR_PATHS"		# 디렉터리 목록 추가
 
 echo '#!/bin/bash' > exec.sh	# exec.sh 작성
 echo '' >> exec.sh
-echo 'PS=`sudo docker ps` # get docker list' >> exec.sh
+echo 'ID=`sudo docker ps -q -f name=smi2srt` # smi2srt 컨테이너의 id 획득' >> exec.sh
 echo '' >> exec.sh
-echo 'TMP=0		# before words' >> exec.sh
-echo 'ID=0		# smi2srt container id' >> exec.sh
+echo "CMD='$START_CMD'	# 컨테이너 내에서 실행할 명령어" >> exec.sh
 echo '' >> exec.sh
-echo 'for word in $PS;	do # docker list search' >> exec.sh
-echo '	if [[ $word == "cpm0722/smi2srt:latest" ]]; then' >> exec.sh
-echo '		ID=$TMP	# save smi2srt before token to ID' >> exec.sh
-echo '	fi' >> exec.sh
-echo '	TMP=$word	# save before token to TMP' >> exec.sh
-echo 'done' >> exec.sh
-echo '' >> exec.sh
-echo 'echo $ID' >> exec.sh
-echo '' >> exec.sh
-echo "CMD='$START_CMD'	# command for run in container" >> exec.sh
-echo '' >> exec.sh
-echo 'sudo docker exec $ID $CMD	# docker exec command' >> exec.sh
+echo 'sudo docker exec $ID $CMD	# docker exec 명령어 작성' >> exec.sh
 
 sudo chmod +x exec.sh	# exec.sh에 execute 권한 부여
 

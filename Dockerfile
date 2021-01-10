@@ -16,7 +16,8 @@ ENV		LANGUAGE ko_KR:en
 ENV		LC_ALL ko_KR.UTF-8
 RUN		update-locale LANG=ko_KR.UTF-8
 
-### TIMEZONE ENV		TZ=Asia/Seoul
+### TIMEZONE
+ENV		TZ=Asia/Seoul
 RUN		apt-get install -y tzdata
 
 ### DEV_TOOLS
@@ -33,5 +34,5 @@ RUN		apt-get install -y nodejs
 RUN		npm install smi2srt -g
 
 ### cpm0722/smi2srt
-RUN		git clone https://github.com/cpm0722/smi2srt.git
-RUN		gcc -o /smi2srt/smi2srt /smi2srt/smi2srt.c
+RUN	git clone https://github.com/cpm0722/smi2srt.git
+RUN	gcc -o /smi2srt/smi2srt /smi2srt/smi2srt.c
