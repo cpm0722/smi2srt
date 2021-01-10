@@ -16,7 +16,7 @@ Made by Hansu Kim (cpm0722@kakao.com)
 
     [make_script.sh 다운로드](https://github.com/cpm0722/smi2srt/raw/main/make_script.sh)
 
-    위의 파일을 다운로드해 NAS에 업로드한다. homes/계정명/smi2srt 디렉터리에 넣는다. smi2srt 디렉터리가 없다면 새로 생성한다.
+    위의 파일을 다운로드해 NAS에 업로드한다. homes/[DSM계정명]/smi2srt 디렉터리에 넣는다. smi2srt 디렉터리가 없다면 새로 생성한다.
 
 2. DSM → 제어판 → 터미널 및 SNMP → 터미널 → SSH 서비스 활성화
 
