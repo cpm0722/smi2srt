@@ -9,8 +9,8 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-#define PATH_LEN 2048
-#define FILE_LEN 128
+#define PATH_LEN 8192
+#define FILE_LEN 1024
 #define CMD_LEN PATH_LEN * 2 + 20
 #define TIME_LEN 40
 
